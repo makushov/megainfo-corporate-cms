@@ -66,7 +66,7 @@
 
                                     <div class="control-group">
                                         <div class="control-label">
-                                            {lang("Preliminary contents","admin")}: <span class="must">*</span>
+                                            {lang("Preliminary contents","admin")}:
                                         </div>
                                         <div class="controls">
                                             <textarea id="prev_text" class="elRTE" required name="prev_text" rows="10" cols="180" ></textarea>

@@ -96,7 +96,7 @@
 
                                     <div class="control-group">
                                         <label class="control-label">
-                                            {lang("Preliminary contents","admin")}: <span class="must">*</span>
+                                            {lang("Preliminary contents","admin")}:
                                         </label>
                                         <div class="controls">
                                             <textarea id="prev_text" class="elRTE" name="prev_text" rows="10" cols="180" >{encode($prev_text)}</textarea>
