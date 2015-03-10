@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>{lang("Operation panel","admin")} | {if MAINSITE}Premmerce{else:}Image CMS{/if}</title>
+        <title>Mega CMS</title>
         <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
-        <meta name="description" content="{lang("Operation panel","admin")} - Image CMS" />
+        <meta name="description" content="Mega CMS" />
         <meta name="generator" content="megacms">
 
         <link href='https://fonts.googleapis.com/css?family=Roboto:400,700,300&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
@@ -27,7 +27,7 @@
         <link rel="stylesheet" type="text/css" href="{$THEME}js/colorpicker/css/colorpicker.css" media="screen" charset="utf-8">
         <script src="{$THEME}js/jquery-1.8.2.min.js" type="text/javascript"></script>
 
-        <link rel="icon" type="image/x-icon" href="{$THEME}images/{if MAINSITE}premmerce_{/if}favicon.png"/>
+        <link rel="icon" type="image/x-icon" href="{$THEME}images/favicon.png"/>
 
         <link rel="stylesheet" type="text/css" href="{echo site_url('/js/jquery.fancybox-1.3.4/fancybox/jquery.fancybox-1.3.4.css')}" media="screen" charset="utf-8">
     </head>
