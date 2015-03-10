@@ -280,9 +280,9 @@ function handleFormSubmit() {
         $('.workzone textarea.elRTE').elrte('updateSource');
 
     //copy data into textarea
-//    if(textEditor && 'tinymce' == textEditor){
-//        tinyMCE.triggerSave();
-//    }
+        if(textEditor && 'tinymce' == textEditor){
+        tinyMCE.triggerSave();
+    }
 
 var selector = $this.attr('data-form'),
 action = $this.data('action'),
