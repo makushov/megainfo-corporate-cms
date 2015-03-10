@@ -4,7 +4,7 @@
         <title>{lang("Operation panel","admin")} | {if MAINSITE}Premmerce{else:}Image CMS{/if}</title>
         <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
         <meta name="description" content="{lang("Operation panel","admin")} - Image CMS" />
-        <meta name="generator" content="ImageCMS">
+        <meta name="generator" content="megacms">
 
         <link href='https://fonts.googleapis.com/css?family=Roboto:400,700,300&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
 
@@ -34,130 +34,39 @@
     <body>
         {literal}
             <style>
-                .imagecms-close{cursor: pointer;position: absolute;right: -100px;top: 0;height: 31px;background-color: #4e5a68;width: 95px;display: none;z-index: 3;}
-                .imagecms-top-fixed-header.imagecms-active{height: 31px;background-color: #37414d;}
-                .imagecms-toggle-close-text{color: #fff;}
-                .imagecms-top-fixed-header.imagecms-active + .main_body header{padding-top: 31px;}
-                .imagecms-top-fixed-header{height: 0;position: fixed;top: 0;left: 0;width: 100%;font-family: Arial, sans-serif;font-size: 12px;color: #223340;vertical-align: baseline;z-index: 1000}
-                .imagecms-top-fixed-header .container{position: relative;}
-                .imagecms-logo{float: left;}
-                .imagecms-ref-skype, .imagecms-phone{font-size: 0;}
-                .imagecms-phone{margin-right: 32px;}
-                .imagecms-phone .imagecms-text-el{font-size: 12px;color: #fff;}
-                .imagecms-ref-skype .imagecms-text-el{font-size: 12px;color: #fff;}
-                .imagecms-ref-skype{color: #223340;text-decoration: none;}
-                .imagecms-ref-skype:hover{color: #223340;text-decoration: none;}
-                .imagecms-list{list-style: none;margin: 0;float: left;display: none;}
-                .imagecms-list > li{height: 31px;vertical-align: top;padding: 0 23px;text-align: left;border-right: 1px solid #525f6f;display: inline-block;}
-                .imagecms-list > li > a{line-height: 31px;}
-                .imagecms-list > li:first-child{border-left: 1px solid #525f6f;}
-                .imagecms-ref{color: #fff;text-decoration: none;text-transform: uppercase;font-size: 11px;}
-                .imagecms-ref:hover{color: #fff;text-decoration: none;}
-                .imagecms-ico-phone, .imagecms-ico-skype{width: auto !important;height: auto !important;position: relative !important;vertical-align: baseline;}
-                .imagecms-ico-skype{position: relative;top: 3px;margin-right: 10px;}
-                .imagecms-ico-phone{position: relative;top: 2px;margin-right: 6px;}
-                .imagecms-buy-license > a{text-decoration: none;height: 100%;display: block;padding: 0 20px;font-size: 0;}
-                .imagecms-buy-license > a > .imagecms-text-el{color: #fff;font-weight: normal;font-size: 11px;line-height: 31px;text-transform: uppercase;}
-                .imagecms-buy-license{
-                    display: none;float: right;height: 31px;box-shadow: 0 1px 1px rgba(0,0,0,.1);
-                    background: #0eb48e; /* Old browsers */
-                    background: -moz-linear-gradient(top,  #0eb48e 0%, #09a77d 100%); /* FF3.6+ */
-                    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#0eb48e), color-stop(100%,#09a77d)); /* Chrome,Safari4+ */
-                    background: -webkit-linear-gradient(top,  #0eb48e 0%,#09a77d 100%); /* Chrome10+,Safari5.1+ */
-                    background: -o-linear-gradient(top,  #0eb48e 0%,#09a77d 100%); /* Opera 11.10+ */
-                    background: -ms-linear-gradient(top,  #0eb48e 0%,#09a77d 100%); /* IE10+ */
-                    background: linear-gradient(to bottom,  #0eb48e 0%,#09a77d 100%); /* W3C */
-                    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0eb48e', endColorstr='#09a77d',GradientType=0 ); /* IE6-9 */
-                }
-                .imagecms-contacts{text-align: center;padding-top: 6px;display: none;}
-                .imagecms-buy-license .imagecms-text-el{vertical-align: middle;}
-                .imagecms-buy-license .imagecms-ico-donwload{vertical-align: middle;margin-left: 11px;}
+                .megacms-close{cursor: pointer;position: absolute;right: -100px;top: 0;height: 31px;background-color: #4e5a68;width: 95px;display: none;z-index: 3;}
+                .megacms-top-fixed-header.megacms-active{height: 31px;background-color: #37414d;}
+                .megacms-toggle-close-text{color: #fff;}
+                .megacms-top-fixed-header.megacms-active + .main_body header{padding-top: 31px;}
+                .megacms-top-fixed-header{height: 0;position: fixed;top: 0;left: 0;width: 100%;font-family: Arial, sans-serif;font-size: 12px;color: #223340;vertical-align: baseline;z-index: 1000}
+                .megacms-top-fixed-header .container{position: relative;}
+                .megacms-logo{float: left;}
+                .megacms-ref-skype, .megacms-phone{font-size: 0;}
+                .megacms-phone{margin-right: 32px;}
+                .megacms-phone .megacms-text-el{font-size: 12px;color: #fff;}
+                .megacms-ref-skype .megacms-text-el{font-size: 12px;color: #fff;}
+                .megacms-ref-skype{color: #223340;text-decoration: none;}
+                .megacms-ref-skype:hover{color: #223340;text-decoration: none;}
+                .megacms-list{list-style: none;margin: 0;float: left;display: none;}
+                .megacms-list > li{height: 31px;vertical-align: top;padding: 0 23px;text-align: left;border-right: 1px solid #525f6f;display: inline-block;}
+                .megacms-list > li > a{line-height: 31px;}
+                .megacms-list > li:first-child{border-left: 1px solid #525f6f;}
+                .megacms-ref{color: #fff;text-decoration: none;text-transform: uppercase;font-size: 11px;}
+                .megacms-ref:hover{color: #fff;text-decoration: none;}
+                .megacms-ico-phone, .megacms-ico-skype{width: auto !important;height: auto !important;position: relative !important;vertical-align: baseline;}
+                .megacms-ico-skype{position: relative;top: 3px;margin-right: 10px;}
+                .megacms-ico-phone{position: relative;top: 2px;margin-right: 6px;}
 
-                .imagecms-active .imagecms-buy-license, .imagecms-active .imagecms-list, .imagecms-active .imagecms-contacts{display: block;}
+                .megacms-contacts{text-align: center;padding-top: 6px;display: none;}
+
+
+                .megacms-active .megacms-buy-license, .megacms-active .megacms-list, .megacms-active .megacms-contacts{display: block;}
             </style>
         {/literal}
         {include_tpl('inc/javascriptVars')}
         {include_tpl('inc/jsLangs.tpl')}
         {$langDomain = $CI->land->gettext_domain}
         {$CI->lang->load('admin')}
-        {if SHOP_INSTALLED && (trim($content) == 'Строк тестовой лицензии истек' OR trim($content) == 'Ошибка проверки лицензии.')}
-            <div class="imagecms-top-fixed-header{if $_COOKIE['condPromoToolbar'] == '1' || $_COOKIE['condPromoToolbar'] == NULL} imagecms-active{/if}">
-                <div class="imagecms-inside">
-                    <div class="container">
-                        <button type="button" class="imagecms-close" {if $_COOKIE['condPromoToolbar'] == '1' || $_COOKIE['condPromoToolbar'] == NULL}style="display: block;"{/if} onclick="setCookie('condPromoToolbar', '0');
-                                $('.imagecms-top-fixed-header').removeClass('imagecms-active');
-                                $(this).hide().next().show();
-                                $(window).scroll();">
-                            <span class="imagecms-toggle-close-text imagecms-bar-close-text"><span style="font-size: 14px;">↑</span> Скрыть</span>
-                        </button>
-                        <button type="button" class="imagecms-close" {if $_COOKIE['condPromoToolbar'] == '0'}style="display: block;"{/if} onclick="setCookie('condPromoToolbar', '1');
-                                $('.imagecms-top-fixed-header').addClass('imagecms-active');
-                                $(this).hide().prev().show();
-                                $(window).scroll();">
-                            <span class="imagecms-toggle-close-text imagecms-bar-show-text"><span style="font-size: 14px;">↓</span> Показать</span>
-                        </button>
-                        <div class="imagecms-buy-license">
-                            <a href="http://www.imagecms.net/shop/prices" target="_blank" onclick="_gaq.push(['_trackEvent', 'demoshop-admin', '/shop/prices']);">
-                                <span class="imagecms-text-el">Купить лицензицю</span>
-                            </a>
-                        </div>
-                        <ul class="imagecms-list">
-                            <li>
-                                <a href="http://www.imagecms.net" target="_blank" class="imagecms-ref" onclick="_gaq.push(['_trackEvent', 'demoshop-admin', 'obzor-product-shop']);">Обзор продукта</a>
-                            </li>
-                            <li>
-                                <a href="http://www.imagecms.net/kliuchevye-preimushchestva/vozmozhnosti" target="_blank" class="imagecms-ref" onclick="_gaq.push(['_trackEvent', 'demoshop-admin', '/kliuchevye-preimushchestva/vozmozhnosti']);">преимущества продукта</a>
-                            </li>
-                            <li>
-                                <a href="http://www.imagecms.net/store/category/shoptemplates" target="_blank" class="imagecms-ref" onclick="_gaq.push(['_trackEvent', 'demoshop-admin', 'shoptemplates']);">{lang('Шаблоны для Shop', 'newLevel')}</a>
-                            </li>
-                        </ul>
-                        <div class="imagecms-contacts">
-                            <span class="imagecms-phone">
-                                <img src="{$THEME}icon_phone.png" class="imagecms-ico-phone"/>
-                                <span class="imagecms-text-el">+7 (499) 703-37-51</span>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        {/if}
-        {if !SHOP_INSTALLED}
-            <div class="imagecms-top-fixed-header{if $_COOKIE['condPromoToolbar'] == '1' || $_COOKIE['condPromoToolbar'] == NULL} imagecms-active{/if}">
-                <div class="imagecms-inside">
-                    <div class="container">
-                        <button type="button" class="imagecms-close" {if $_COOKIE['condPromoToolbar'] == '1' || $_COOKIE['condPromoToolbar'] == NULL}style="display: block;"{/if} onclick="setCookie('condPromoToolbar', '0');
-                                $('.imagecms-top-fixed-header').removeClass('imagecms-active');
-                                $(this).hide().next().show();
-                                $(window).scroll();">
-                            <span class="imagecms-toggle-close-text imagecms-bar-close-text"><span style="font-size: 14px;">↑</span> {lang('Hide', 'admin')}</span>
-                        </button>
-                        <button type="button" class="imagecms-close" {if $_COOKIE['condPromoToolbar'] == '0'}style="display: block;"{/if} onclick="setCookie('condPromoToolbar', '1');
-                                $('.imagecms-top-fixed-header').addClass('imagecms-active');
-                                $(this).hide().prev().show();
-                                $(window).scroll();">
-                            <span class="imagecms-toggle-close-text imagecms-bar-show-text"><span style="font-size: 14px;">↓</span> {lang('Show', 'admin')}</span>
-                        </button>
-                        <div class="imagecms-buy-license">
-                            <a href="http://www.imagecms.net/download/corporate" target="_blank" onclick="_gaq.push(['_trackEvent', 'demo-admin', '/download/corporate']);">
-                                <span class="imagecms-text-el">Скачать бесплатно</span>
-                            </a>
-                            </div>
-                        <ul class="imagecms-list">
-                            <li>
-                                <a href="http://www.imagecms.net/free-cms-corporate" target="_blank" class="imagecms-ref" onclick="_gaq.push(['_trackEvent', 'demo-admin', '/free-cms-corporate']);">Обзор продукта</a>
-                            </li>
-                            <li>
-                                <a href="http://www.imagecms.net/corporate-bazovye-vozmozhnosti" target="_blank" class="imagecms-ref" onclick="_gaq.push(['_trackEvent', 'demo-admin', '/corporate-bazovye-vozmozhnosti']);">Базовые возможности</a>
-                            </li>
-                            <li>
-                                <a href="http://www.imagecms.net/blog" target="_blank" class="imagecms-ref" onclick="_gaq.push(['_trackEvent', 'demo-admin', '/blog']);">Блог</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        {/if}
         <div class="main_body">
             <div id="fixPage"></div>
             <!-- Here be notifications -->
@@ -170,9 +79,9 @@
                             <a href="{if SHOP_INSTALLED}{base_url('admin/components/run/shop/dashboard')}{else:}/admin/dashboard{/if}" class="logo pull-left pjax">
                                 <span class="helper"></span>
                                 {if MAINSITE}
-                                    <img src="{$THEME}img/logo_premmerce.png"/>
+                                    <img src="{$THEME}img/logo.png"/>
                                 {else:}
-                                    <img src="{$THEME}img/logo_new.png"/>
+                                    <img src="{$THEME}img/logo.png"/>
                                 {/if}
                             </a>
 
@@ -390,24 +299,6 @@
                             {lang('Interface','admin')}:
                             {echo create_admin_language_select()}
                         </div>
-                        <div class="span4 t-a_c">
-                            {if !defined('MAINSITE')}
-                                {lang("Version","admin")}: <b>{echo getCMSNumber()}</b>-->
-                            {/if}
-                            <div class="muted">{lang('Help us get better','admin')} - <a href="#"  onclick="$('.addNotificationMessage').modal();
-                                    return false;">{lang('report an error','admin')}</a></div>
-                        </div>
-                        {if !MAINSITE}
-                            <div class="span4 t-a_r">
-                                <div class="muted">Copyright © ImageCMS {echo date('Y')}</div>
-                                <a href="{if MAINSITE}http://docs.premmerce.com/{else:}http://docs.imagecms.net{/if}" target="blank">{lang('Documentation','admin')}</a>
-                            </div>
-                        {else:}
-                            <div class="span4 t-a_r">
-                                <div class="muted">Copyright © Premmerce {echo date('Y')}</div>
-                                <a href="http://docs.premmerce.com" target="blank">{lang('Documentation','admin')}</a>
-                            </div>
-                        {/if}
                     </div>
                 </div>
             </footer>
@@ -578,7 +469,7 @@
                         var elfToken = '{echo $CI->lib_csrf->get_token()}';
                 </script>
                 {if MAINSITE}
-                    <script id="rhlpscrtg" type="text/javascript" charset="utf-8" async="async" src="https://web.redhelper.ru/service/main.js?c=imagecms"/>
+                    <script id="rhlpscrtg" type="text/javascript" charset="utf-8" async="async" src="https://web.redhelper.ru/service/main.js?c=megacms"/>
                 {/if}
                 <div id="jsOutput" style="display: none;"></div>
             </body>
