@@ -3,7 +3,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
-        <title>{lang('Operation panel',"admin")} - Image CMS</title>
+        <title>Mega CMS</title>
         <meta name="description" content="{lang('Operation panel',"admin")} - Image CMS" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <link rel="stylesheet" type="text/css" href="{$THEME}css/bootstrap.css"/>
@@ -32,10 +32,10 @@
                     <a href="/admin/dashboard" class="d-i_b">
                         {if MAINSITE}
                             <!-- if premmerce store login -->
-                            <img src="{$THEME}img/logo_login_premmerce.png"/>
+                            <img src="{$THEME}img/logo.png"/>
                             <!-- if premmerce store login end -->
                         {else:}
-                            <img src="{$THEME}img/logo_login_imagecms.png"/>
+                            <img src="{$THEME}img/logo.png"/>
                         {/if}
                     </a>
                 </div>

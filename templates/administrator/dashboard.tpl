@@ -111,26 +111,7 @@
                 </table>
             </div>
             <div class="span4">
-                <table class="table table-bordered table-hover table-condensed content_big_td" style="margin-top: 40px;">
-                    <thead>
-                    <th>{lang("System","admin")}</th>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <p>
-                                    {lang("Version","admin")}: {$cms_number} <br />
-                                    <a class="pjax" href="/admin/sys_update">
-                                        {lang('Check version update' , 'admin')}
-                                    </a>
-                                    <br/>
-                                    <a href="/admin/sys_info" class="pjax">{lang("Information","admin")}</a>
-                                </p>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <table class="table  table-bordered table-hover table-condensed content_big_td">
+                <table class="table  table-bordered table-hover table-condensed content_big_td" style="margin-top:40px;">
                     <thead>
                     <th>{lang("Statistics","admin")}</th>
                     </thead>
@@ -168,32 +149,9 @@
                         </tbody>
                     </table>
                 {/if}
-                {if count($api_news) > 1}
-                    <table class="table  table-bordered table-hover table-condensed content_big_td">
-                        <thead>
-                        <th>{lang('Interesting articles with blog ImageCMS',"admin")}</th>
-                        </thead>
-                        <tbody>
-                            {foreach $api_news as $a}
-                                <tr>
-                                    <td>
-                                        <span>{date('d-m-Y H:i', $a.publish_date)}
-                                            <a style="padding-left:10px;" target="_blank" href="http://www.imagecms.net/{$a.cat_url}{$a.url}?utm_source=imagecms&utm_medium=admin&utm_campaign={str_replace(array("http://", "/"), "",site_url())}">>>></a>
-                                        </span>
-                                        <br/> {truncate(strip_tags($a.prev_text), 100)}
-                                    </td>
-                                </tr>
-                            {/foreach}
-                        </tbody>
-                    </table>
-                {/if}
+
             </div>
         </div>
         {include_tpl('modules_additions')}
-        {if !SHOP_INSTALLED}
-            <a href="http://www.imagecms.net/kliuchevye-preimushchestva/vozmozhnosti?utm_source=imagecmscorporate&utm_medium=admin&utm_campaign=shopview" target="_blank">
-                <img src="{$THEME}images/image.png"/>
-            </a>
-            {/if}
     </section>
 </div>
