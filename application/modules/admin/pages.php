@@ -148,7 +148,7 @@ class Pages extends BaseAdminController {
         
         $this->form_validation->set_rules('page_title', lang("Title", "admin"), 'trim|required|min_length[1]|max_length[500]');
         $this->form_validation->set_rules('page_url', lang("URL", "admin"), 'alpha_dash');
-        $this->form_validation->set_rules('prev_text', lang("Preliminary contents", "admin"), 'trim|required');
+        $this->form_validation->set_rules('prev_text', lang("Preliminary contents", "admin"), 'trim');
         $this->form_validation->set_rules('page_description', lang("Description ", "admin"), 'trim');
         $this->form_validation->set_rules('full_tpl', lang("Page template", "admin"), 'trim|max_length[150]|min_length[2]|callback_tpl_validation');
         $this->form_validation->set_rules('create_date', lang("Creation date", "admin"), 'required|valid_date');
@@ -490,7 +490,7 @@ class Pages extends BaseAdminController {
         $this->form_validation->set_rules('page_title', lang("Title", "admin"), 'trim|required|min_length[1]|max_length[500]');
         $this->form_validation->set_rules('page_url', lang("URL", "admin"), 'alpha_dash');
         $this->form_validation->set_rules('page_keywords', lang("Keywords", "admin"), 'trim');
-        $this->form_validation->set_rules('prev_text', lang("Preliminary contents", "admin"), 'trim|required');
+        $this->form_validation->set_rules('prev_text', lang("Preliminary contents", "admin"), 'trim');
         $this->form_validation->set_rules('page_description', lang("Description ", "admin"), 'trim');
         $this->form_validation->set_rules('full_tpl', lang("Page template", "admin"), 'trim|max_length[50]|min_length[2]|callback_tpl_validation');
         $this->form_validation->set_rules('main_tpl', lang("Main page template ", "admin"), 'trim|max_length[50]|min_length[2]|callback_tpl_validation');
