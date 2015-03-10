@@ -247,4 +247,4 @@
         </div>
     </div>
 
-</div><?php $mabilis_ttl=1425720903; $mabilis_last_modified=1425473714; //templates/corporate/comments/comments_api.tpl ?>
+</div><?php $mabilis_ttl=1426053014; $mabilis_last_modified=1425968115; //templates/corporate/comments/comments_api.tpl ?>
