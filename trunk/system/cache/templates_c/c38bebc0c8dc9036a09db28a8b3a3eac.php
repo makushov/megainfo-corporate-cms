@@ -28,4 +28,4 @@ langs["Empty list"] = '<?php echo addslashes(lang("Empty list", "admin", FALSE))
 langs["More"] = '<?php echo addslashes(lang("More", "admin", FALSE))?>';
 langs["No results for your query"] = '<?php echo addslashes(lang("No results for your query", "admin", FALSE))?>';
 langs["PHP GD library is not installed"] = '<?php echo addslashes(lang("PHP GD library is not installed", "admin", FALSE))?>';
-</script><?php $mabilis_ttl=1426166227; $mabilis_last_modified=1425968098; //Z:\home\imgcms\www\templates\administrator/inc/jsLangs.tpl ?>
+</script><?php $mabilis_ttl=1426167337; $mabilis_last_modified=1425968098; //Z:\home\imgcms\www\templates\administrator/inc/jsLangs.tpl ?>

@@ -71,7 +71,6 @@ class Cfcm extends MY_Controller {
                     if ($item_id > 0) {
                         // Save fields data
                         $data = $form->getData();
-
                         $this->update_fields_data($item_id, $data, $type);
 
                         // Delete empty fields
@@ -323,6 +322,9 @@ class Cfcm extends MY_Controller {
                 );
 
                 if (!is_array($val)) {
+					$pos = strpos($val, "/uploads");				// АБСОЛЮТНЫЙ ПУТЬ К ИЗОБРАЖЕНИЮ
+					$val = substr($val, $pos);
+				
                     if ($this->db->get_where('content_fields_data', $field_data)->num_rows() > 0) {
                         $this->db->where($field_data);
                         $field_data['data'] = $val;

@@ -120,4 +120,4 @@
 
 </script>
 
-<?php $mabilis_ttl=1426166227; $mabilis_last_modified=1425968098; //Z:\home\imgcms\www\templates\administrator/inc/javascriptVars.tpl ?>
+<?php $mabilis_ttl=1426167337; $mabilis_last_modified=1425968098; //Z:\home\imgcms\www\templates\administrator/inc/javascriptVars.tpl ?>
