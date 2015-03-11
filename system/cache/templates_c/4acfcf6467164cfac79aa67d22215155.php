@@ -471,4 +471,4 @@
                 <div id="jsOutput" style="display: none;"></div>
             </body>
         </html>
-<?php $mabilis_ttl=1426166227; $mabilis_last_modified=1425995164; //Z:\home\imgcms\www\templates/administrator/main.tpl ?>
+<?php $mabilis_ttl=1426167337; $mabilis_last_modified=1425995164; //Z:\home\imgcms\www\templates/administrator/main.tpl ?>
