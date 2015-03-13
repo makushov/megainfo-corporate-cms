@@ -84,15 +84,31 @@ class Admin extends BaseAdminController {
     /**
      * Display create_item.tpl
      */
+    
+    function buildTree($elements, $parentId = 0) {
+        $branch = array();
+        foreach ($elements as $element) {
+                    //echo '<pre>'; print_r($element); echo '</pre>';
+            if ($element['parent_id'] == $parentId) {
+                $children = $this->buildTree($elements, $element['id']);
+                if ($children) {
+                    $element['sub'] = $children;
+                }
+                $branch[] = $element;
+            }
+        }
+
+        return $branch;
+    }
+    
     function create_item($id = null) {
         if (empty($_POST)) {
-            $parents = $this->db
-                            ->where('menu_id', $id)
-                            //->join('menu_translate', 'menus_data.id = menu_translate.item_id')
-                            //->where('lang_id', $this->default_lang_id)
-                            ->get('menus_data')->result_array();
-
-
+            
+            $condition = array("menu_id" => $id);		
+            $parents = $this->db->where($condition)->get('menus_data')->result_array();
+			
+            $parents = $this->buildTree($parents);
+              
             $menu = $this->db->where('id', $id)->get('menus')->row_array();
             $cats = $this->lib_category->build();
             $pages = $this->get_pages(0, 0, 'controller');
@@ -443,11 +459,12 @@ class Admin extends BaseAdminController {
                                 ->where('menus_data.id', $item_id)
                                 ->get('menus_data')->row_array();
             }
-            $parents = $this->db
-                            ->where('menu_id', $item['menu_id'])
-                           // ->join('menu_translate', 'menus_data.id = menu_translate.item_id')
-                           // ->where('lang_id', $this->default_lang_id)
-                            ->get('menus_data')->result_array();
+
+            $condition = array("menu_id" => $item['menu_id']);		
+            $parents = $this->db->where($condition)->get('menus_data')->result_array();
+			
+            $parents = $this->buildTree($parents);
+            
             $menu = $this->db->where('id', $item['menu_id'])->get('menus')->row_array();
             $cats = $this->lib_category->build();
             $pages = $this->get_pages(0, 0, 'controller');

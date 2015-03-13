@@ -123,7 +123,17 @@
                                                 <select name="parent_id" id="item_parent_id">
                                                     <option value="0">{lang("No", "menu")}</option>
                                                     {foreach $parents as $par}
-                                                    <option value="{$par.id}" {if $item.parent_id != 0 AND $item.parent_id == $par.id}selected="selected"{/if}> - {$par.title}</option>
+                                                        <option value="{$par.id}" {if $item.parent_id != 0 AND $item.parent_id == $par.id}selected="selected"{/if}> - {$par.title}</option>
+                                                            {if $par['sub']}
+								{foreach $par['sub'] as $sub}
+                                                                    <option value="{$sub.id}" {if $item.parent_id != 0 AND $item.parent_id == $sub.id}selected="selected"{/if}> - - {$sub.title}</option>                                                                    
+                                                                    {if $sub['sub']}
+                                                                        {foreach $sub['sub'] as $subsub}
+                                                                            <option value="{$subsub.id}" {if $item.parent_id != 0 AND $item.parent_id == $subsub.id}selected="selected"{/if}> - - - {$subsub.title}</option>
+                                                                        {/foreach}
+                                                                    {/if}
+								{/foreach}
+                                                            {/if}
                                                     {/foreach}
                                                 </select>
                                             </div>

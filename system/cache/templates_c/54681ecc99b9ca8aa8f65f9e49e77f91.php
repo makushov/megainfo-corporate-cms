@@ -125,6 +125,16 @@
                                                     <option value="0"><?php echo lang ("No", "menu"); ?></option>
                                                     <?php if(is_true_array($parents)){ foreach ($parents as $par){ ?>
                                                         <option value="<?php echo $par['id']; ?>" <?php if($item['parent_id']  != 0 AND  $item['parent_id']  ==  $par['id']): ?>selected="selected"<?php endif; ?>> - <?php echo $par['title']; ?></option>
+                                                            <?php if($par['sub']): ?>
+								<?php if(is_true_array($par['sub'])){ foreach ($par['sub'] as $sub){ ?>
+                                                                    <option value="<?php echo $sub['id']; ?>" <?php if($item['parent_id']  != 0 AND  $item['parent_id']  ==  $sub['id']): ?>selected="selected"<?php endif; ?>> - - <?php echo $sub['title']; ?></option>                                                                    
+                                                                    <?php if($sub['sub']): ?>
+                                                                        <?php if(is_true_array($sub['sub'])){ foreach ($sub['sub'] as $subsub){ ?>
+                                                                            <option value="<?php echo $subsub['id']; ?>" <?php if($item['parent_id']  != 0 AND  $item['parent_id']  ==  $subsub['id']): ?>selected="selected"<?php endif; ?>> - - - <?php echo $subsub['title']; ?></option>
+                                                                        <?php }} ?>
+                                                                    <?php endif; ?>
+								<?php }} ?>
+                                                            <?php endif; ?>
                                                     <?php }} ?>
                                                 </select>
                                             </div>
@@ -632,4 +642,4 @@
             });
         }
     </script>
-<?php $mabilis_ttl=1426330371; $mabilis_last_modified=1426235906; //Z:\home\newimgcms\www\application\modules\menu/templates/edit_item.tpl ?>
+<?php $mabilis_ttl=1426339554; $mabilis_last_modified=1426254863; //Z:\home\newimgcms\www\application\modules\menu/templates/edit_item.tpl ?>
