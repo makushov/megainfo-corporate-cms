@@ -1,5 +1,7 @@
 проверка
 ДИБИЛИЗ
+проверка dfasd
+
 Версия 2.9.0
 	Полный список изменений http://www.imagecms.net/blog/changelog/imagecms_shop_versiia_290
 Версия 2.5.5
