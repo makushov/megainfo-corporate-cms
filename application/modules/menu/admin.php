@@ -88,8 +88,8 @@ class Admin extends BaseAdminController {
         if (empty($_POST)) {
             $parents = $this->db
                             ->where('menu_id', $id)
-                            ->join('menu_translate', 'menus_data.id = menu_translate.item_id')
-                            ->where('lang_id', $this->default_lang_id)
+                            //->join('menu_translate', 'menus_data.id = menu_translate.item_id')
+                            //->where('lang_id', $this->default_lang_id)
                             ->get('menus_data')->result_array();
 
 
@@ -445,8 +445,8 @@ class Admin extends BaseAdminController {
             }
             $parents = $this->db
                             ->where('menu_id', $item['menu_id'])
-                            ->join('menu_translate', 'menus_data.id = menu_translate.item_id')
-                            ->where('lang_id', $this->default_lang_id)
+                           // ->join('menu_translate', 'menus_data.id = menu_translate.item_id')
+                           // ->where('lang_id', $this->default_lang_id)
                             ->get('menus_data')->result_array();
             $menu = $this->db->where('id', $item['menu_id'])->get('menus')->row_array();
             $cats = $this->lib_category->build();
