@@ -1,0 +1,1 @@
+<ul class="menu"><?php if(isset($wrapper)){ echo $wrapper; } ?></ul><?php $mabilis_ttl=1426314482; $mabilis_last_modified=1426229764; ///Applications/MAMP/htdocs/imagecms/imagecms/application/modules/menu/templates/public/level_0/container.tpl ?>
