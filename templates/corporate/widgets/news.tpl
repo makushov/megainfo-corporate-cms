@@ -13,5 +13,5 @@
     </ul>        
 </div>
 <div class="btn">
-    <a href="{site_url('novosti')}">{lang('Архив новостей','corporate')}</a>
+    <a href="{site_url('novosti')}" style="color: #f60;">{lang('Архив новостей','corporate')}</a>
 </div>

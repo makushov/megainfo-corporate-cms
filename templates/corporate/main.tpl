@@ -21,21 +21,16 @@
         <link rel="icon" type="image/vnd.microsoft.icon" href="{echo siteinfo('siteinfo_favicon_url')}" />
         <link rel="SHORTCUT ICON" href="{echo siteinfo('siteinfo_favicon_url')}"/>
         <script type="text/javascript" src="{$THEME}js/jquery-1.8.3.min.js"></script>
+
     </head>
     <body>
+	<canvas id="flying-bubbles" style= "position: fixed;z-index: -1;"></canvas>
  	{include_tpl('language/jsLangsDefine.tpl')}
         {include_tpl('language/jsLangs.tpl')}
         <div class="main-body">
             <div class="fon-header">
                 <header>
-                    <div class="menu-header">
-                        <div class="container">
-                            <nav class="f_l nav nav-header">
-                                {load_menu('top_menu')}
-                            </nav>
-                            {include_tpl('auth_data')}
-                        </div>
-                    </div>
+                    
                     <div class="content-header">
                         <div class="container">
                             {if $CI->core->core_data['data_type'] == 'main'}
@@ -56,6 +51,7 @@
                 {load_menu('main_menu')}
             </div>
             {$content}
+
             <div class="h-footer"></div>
         </div>
         <footer>
@@ -72,5 +68,25 @@
         </footer>
         <script type="text/javascript" src="{$THEME}js/jquery.pluginssiteimage.js"></script>
         <script type="text/javascript" src="{$THEME}js/scripts.js"></script>
+				<script type="text/javascript" src="{$THEME}js/animate.js"></script>
+		{literal}
+
+
+  
+  <script type="text/javascript">
+	$(window).on('resize', function() {
+		WW = window.innerWidth, HH = window.innerHeight;
+		canvas.width = WW;
+		canvas.height = HH;
+		
+		var circles = []; 
+		for(var i = 0; i < 24; i++ ){
+			circles.push(new create_circle());
+		}
+    });
+	
+  </script>
+ {/literal}		
+			
     </body>
 </html>

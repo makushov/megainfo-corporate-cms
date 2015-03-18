@@ -12,6 +12,7 @@
                 <div class="description">
                     {$page.full_text}
                 </div>
+				{echo $CI->load->module('share')->_make_like_buttons()}
                 {$Comments = $CI->load->module('comments')->init($page)}
 
                 <script type="text/javascript">
