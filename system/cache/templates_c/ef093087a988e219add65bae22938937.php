@@ -5,4 +5,4 @@ langs["Insert menu item after current"] = '<?php echo addslashes(lang("Insert me
 langs["Insert divider before menu item"] = '<?php echo addslashes(lang("Insert divider before menu item", "admin_menu", FALSE))?>';
 langs["Insert divider after menu item"] = '<?php echo addslashes(lang("Insert divider after menu item", "admin_menu", FALSE))?>';
 langs["Delete menu item"] = '<?php echo addslashes(lang("Delete menu item", "admin_menu", FALSE))?>';
-</script><?php $mabilis_ttl=1426339554; $mabilis_last_modified=1426235917; //application/modules/admin_menu/assets/jsLangs.tpl ?>
+</script><?php $mabilis_ttl=1426769492; $mabilis_last_modified=1426235917; //application/modules/admin_menu/assets/jsLangs.tpl ?>

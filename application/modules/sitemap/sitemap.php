@@ -376,7 +376,8 @@ class Sitemap extends MY_Controller {
         $categories = $this->lib_category->unsorted();
 
         foreach ($categories as $category) {
-            if (!$this->robotsCheck(site_url($category['path_url']))) {
+
+								//	echo '<pre>'; print_r($categories); echo '</pre>';
 
                 if ((int) $category['parent_id']) {
                     $changefreq = $this->sub_categories_changefreq;
@@ -402,7 +403,7 @@ class Sitemap extends MY_Controller {
                         'lastmod' => $date
                     );
                 }
-
+				//echo '<pre>'; print_r($this->items); echo '</pre>';
                 // Add links to categories in all langs.
                 foreach ($this->langs as $lang_indentif => $lang) {
                     if ($lang['id'] != $this->default_lang['id']) {
@@ -417,7 +418,7 @@ class Sitemap extends MY_Controller {
                         }
                     }
                 }
-            }
+            
         }
 
         // Get all pages

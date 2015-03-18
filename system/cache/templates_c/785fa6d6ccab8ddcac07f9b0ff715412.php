@@ -75,4 +75,4 @@
         </tbody>
     </table>
 </div>
-<?php $mabilis_ttl=1426339554; $mabilis_last_modified=1426235921; //application/modules/admin_menu/assets/admin/menu.tpl ?>
+<?php $mabilis_ttl=1426769492; $mabilis_last_modified=1426235921; //application/modules/admin_menu/assets/admin/menu.tpl ?>
