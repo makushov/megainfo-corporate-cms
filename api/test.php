@@ -13,9 +13,22 @@
 		
 		$('#but').click(function(){
 			    $.ajax({
+					type: "GET",
+					url: "/api/v1/category",
+					success: function(data) {
+						
+					},
+					error:  function(xhr, str){
+						
+					}
+				});
+		});
+				
+		/*$('#but').click(function(){
+			    $.ajax({
 					type: "POST",
 					url: "/api/v1/auth/login",
-					data: "username=admin@megainfo.com.ua&password=megainfocomuaz",
+					data: "username=admin@megainfo.com.ua&password=megainfocomua",
 					success: function(data) {
 						
 					},
@@ -23,7 +36,7 @@
 						alert("Возникла ошибка!");
 					}
 				});
-		});
+		});*/
 		</script>
 	</body>
 	</html>

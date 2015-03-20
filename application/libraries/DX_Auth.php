@@ -780,7 +780,6 @@ class DX_Auth {
                 // If it's not a banned user then try to login
                 else {
                     $password = $this->_encode($password);
-					echo $password;
                     $stored_hash = $row->password;
 
                     // Is password matched with hash in database ?

@@ -37,6 +37,8 @@ RewriteRule ^(.*)backups(.*)\.zip$ [R=404]
 RewriteCond $1 !^(index\.php|user_guide|uploads/.*|application/third_party/.*|favicon\.ico|docs|favicon\.png|captcha/.*|application/.*/templates|application/.*/assets/js|application/.*/assets/css|application/.*/assets/images|CHANGELOG.xml|templates|js|api)
 RewriteRule ^(.*)$ /index.php/$1 [L]
 
+
+
 ####################################
 # or
 # RewriteRule ^(.+)$ index.php?$1 [L]
