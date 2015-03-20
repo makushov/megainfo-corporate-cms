@@ -13,8 +13,9 @@
 		
 		$('#but').click(function(){
 			    $.ajax({
-					type: "GET",
-					url: "/api/v1/greeting/answerme",
+					type: "POST",
+					url: "/api/v1/auth/login",
+					data: "username=admin@megainfo.com.ua&password=megainfocomuaz",
 					success: function(data) {
 						
 					},
