@@ -1,5 +1,4 @@
 <?
-
 require_once('API_Extend.php');
 
 // Requests from the same server don't have a HTTP_ORIGIN header

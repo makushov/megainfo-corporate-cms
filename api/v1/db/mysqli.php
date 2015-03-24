@@ -12,8 +12,6 @@ class DBMySQLi {
 		}
 
 		$this->link->set_charset("utf8");
-		
-		print_r($db);
 	}
 
 	public function query($sql) {
@@ -32,17 +30,19 @@ class DBMySQLi {
 				$result->row = isset($data[0]) ? $data[0] : array();
 				$result->rows = $data;
 
+
 				unset($data);
 
 				$query->close();
 
 				return $result;
 			} else{
-				return true;
+				return $this->link;
 			}
 		} else {
-			throw new ErrorException('Error: ' . $this->link->error . '<br />Error No: ' . $this->link->errno . '<br />' . $sql);
-			exit();
+			//throw new ErrorException('Error: ' . $this->link->error . '<br />Error No: ' . $this->link->errno . '<br />' . $sql);
+			//exit();
+			return $this->link;
 		}
 	}
 
