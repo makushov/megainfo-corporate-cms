@@ -101,7 +101,7 @@ abstract class API_Base
 		
 		if(!$this->checkAuth($username, $password) && $this->endpoint != "auth") {	
 			$this->allowed = false;
-			return $this->_response("You are not authorized for this action: $this->endpoint", 403);
+			return $this->_response(array("success" => 0, "error_message" => "WRONG_PASS"));
 		}
 										
 	    if($this->allowed){
@@ -116,7 +116,7 @@ abstract class API_Base
 
     private function _response($data, $status = 200) {
         header("HTTP/1.1 " . $status . " " . $this->_requestStatus($status));
-        return json_encode($data, JSON_UNESCAPED_UNICODE); 
+        return json_encode($data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES); 
     }
 
     private function _cleanInputs($data) {
@@ -126,7 +126,7 @@ abstract class API_Base
                 $clean_input[$k] = $this->_cleanInputs($v);
             }
         } else {
-            $clean_input = trim(strip_tags($data));
+            $clean_input = trim(htmlspecialchars(strip_tags($data)));
         }
         return $clean_input;
     }

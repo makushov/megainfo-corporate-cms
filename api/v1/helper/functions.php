@@ -56,17 +56,23 @@
         return $branch;
     }
 	
-	function removeChilds($elements, $id){
+	function removeChilds($elements, $id, $head = true){
 	
 		foreach($elements as $key => $element){
+		
+			if($element['id'] == $id && $head) {
+				unset($elements[$key]);
+				$head = false;
+			}
 		
 			if($element['parent_id'] == $id){
 			
 				$newId = $element['id'];
 				unset($elements[$key]);
-				$elements = removeChilds($elements, $newId);
+				$elements = removeChilds($elements, $newId, $head);
 				
 			}
+
 		}
 		
 		return $elements;
@@ -85,4 +91,36 @@
         }
 		
         return $path;
+	}
+	
+	function oneDimArray($elements){
+		$iterator = new RecursiveIteratorIterator(new RecursiveArrayIterator($elements));
+
+		$result = array();
+		foreach($iterator as $key => $value) {
+			$result[$key] = $value;
+		}
+		
+		return $result;
+	}
+	
+	function nullToEmptyString(&$elements){
+	
+		foreach($elements as $k=>$element){
+			foreach($element as $j=>$el){
+				if($el == null)
+					$elements[$k][$j] = '';
+			}
+		}
+		
+	}
+	
+	function stripTrash(&$elements){
+	
+		foreach($elements as $k=>$element){
+			foreach($element as $j=>$el){				
+				$elements[$k][$j] = str_replace('[removed]', '', $el);				
+			}
+		}
+		
 	}

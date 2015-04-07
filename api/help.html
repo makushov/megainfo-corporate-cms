@@ -1,0 +1,1333 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <title>API Help</title>
+        <meta name="description" content="" />
+        <meta name="keywords" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="stylesheet" type="text/css" href="files/style.css" media="all" />
+
+    </head>
+    <body>
+	<canvas id="flying-bubbles" style= "position: fixed;z-index: -1;"></canvas>
+       <div class="main-body">
+            <div class="fon-header">
+                <header>
+                    
+                    <div class="content-header">
+                        <div class="container">
+                                                            <a href="/" class="logo f_l">
+                                    <img src="files/logo.png" alt="logo.png"/>
+                                </a>
+                                                        <div class="content-cleaner-search f_r">
+
+</div>                            </div>
+                        </div>
+                    </div>
+                </header>
+
+            <div class="frame-inside">
+    <div class="container">
+       
+        <div class="clearfix">
+            <div class="text left">
+                <h1>Документация API</h1>
+                <!-- Start. Show banner. -->
+                                <!-- End. Show banner. -->
+                <div class="description">
+				</br>
+				<table class="mytable">
+					<thead>
+						<th>Действие</th>
+						<th>URL</th>
+						<th>Тип запроса</th>
+						<th style="width:19%">Параметры</th>	
+						<th>Ответы (OK)</th>
+						<th style="width:19%">Ответы (ERROR)</th>
+					</thead>
+					<tbody>
+						<tr>
+							<td colspan="6" style="font-size:14px; font-weight: bold"> Учетная запись </td>
+						</tr>
+						<tr style="border-bottom: 3px solid #f70">
+							<td>Авторизация</td>
+							<td>api/v1/auth/login</td>
+							<td>POST</td>
+							<td>
+								<p><strong>username</strong> (string)</p>
+								<p><strong>password</strong> (string)</p>
+							</td>
+							<td>success: 1</td>
+							<td> 
+								<p>success: 0</p>
+								<p>error_message: </p>
+								<p> WRONG_PASS </p>
+							</td>
+						</tr>
+						
+						<tr>
+							<td colspan="6" style="font-size:14px; font-weight: bold"> Категории </td>
+						</tr>
+						
+						<tr>
+							<td>Получение списка категорий</td>
+							<td>api/v1/category</td>
+							<td>GET</td>
+							<td> 
+								<p><strong>username</strong> (string)</p>
+								<p><strong>password</strong> (string)</p>
+							</td>
+							<td> 
+								<p>success: 1</p>
+								<p>items: []</p>
+							</td>
+							<td> 
+								<p>success: 0</p>
+								<p>error_message: </p>
+								<p> WRONG_PASS </p>
+							</td>
+						</tr>
+						
+						<tr>
+							<td>Получение конкретной категории</td>
+							<td>api/v1/category/ID</td>
+							<td>GET</td>
+							<td> 
+								<p><strong>username</strong> (string)</p>
+								<p><strong>password</strong> (string)</p>
+							</td>
+							<td> 
+								<p>success: 1</p>
+								<p>items: []</p>
+							</td>
+							<td> 
+								<p>success: 0</p>
+								<p>error_message: </p>
+								<p> WRONG_PASS </p>
+							</td>
+						</tr>
+						
+						<tr>
+							<td>Получение списка категорий без потомков указаной категории</td>
+							<td>api/v1/category/filter/ID</td>
+							<td>GET</td>
+							<td> 
+								<p><strong>username</strong> (string)</p>
+								<p><strong>password</strong> (string)</p>
+							</td>
+							<td> 
+								<p>success: 1</p>
+								<p>items: []</p>
+							</td>
+							<td> 
+								<p>success: 0</p>
+								<p>error_message: </p>
+								<p> WRONG_PASS </p>
+							</td>
+						</tr>
+
+						<tr>
+							<td>Добавление категории</td>
+							<td>api/v1/category/</td>
+							<td>POST</td>
+							<td> 
+								<p><strong>username</strong> (string)</p>
+								<p><strong>password</strong> (string)</p>
+								<p><strong>parent_id</strong> (int)</p>
+								<p><strong>name<span class="red">*</span></strong> (string)</p>
+								<p><strong>title<span class="red">*</span></strong> (string)</p>
+								<p><strong>short_desc</strong> (string) </p>
+								<p><strong>url<span class="red">*</span></strong> (string) </p>
+								<p><strong>description</strong> (string) </p>
+								<p><strong>keywords</strong> (string) </p>
+							</td>
+							<td> 
+								<p>success: 1</p>
+								<p>insert_id: #</p>
+							</td>
+							<td> 
+								<p>success: 0</p>
+								<p>error_message: </p>
+								<p> WRONG_PASS </p>
+								<hr> </hr>								
+								<p>success: 0</p>
+								<p>error_message: </p>
+								<p> INCORRECT DATA </p>
+							</td>
+						</tr>
+						
+						<tr>
+							<td>Изменение категории</td>
+							<td>api/v1/category/ID</td>
+							<td>PUT</td>
+							<td> 
+								<p><strong>username</strong> (string)</p>
+								<p><strong>password</strong> (string)</p>
+								<p><strong>parent_id<span class="red">*</span></strong> (int)</p>
+								<p><strong>name<span class="red">*</span></strong> (string)</p>
+								<p><strong>title</strong> (string)</p>
+								<p><strong>short_desc</strong> (string) </p>
+								<p><strong>url<span class="red">*</span></strong> (string) </p>
+								<p><strong>description</strong> (string) </p>
+								<p><strong>keywords</strong> (string) </p>
+							</td>
+							<td> 
+								<p>success: 1</p>
+							</td>
+							<td> 
+								<p>success: 0</p>
+								<p>error_message: </p>
+								<p> WRONG_PASS </p>
+								<hr> </hr>								
+								<p>success: 0</p>
+								<p>error_message: </p>
+								<p> CATEGORY NOT FOUND </p>
+							</td>
+						</tr>	
+
+						<tr style="border-bottom: 3px solid #f70">
+							<td>Удаление категории</td>
+							<td>api/v1/category/ID</td>
+							<td>DELETE</td>
+							<td> 
+								<p><strong>username</strong> (string)</p>
+								<p><strong>password</strong> (string)</p>
+							</td>
+							<td> 
+								<p>success: 1</p>
+							</td>
+							<td> 
+								<p>success: 0</p>
+								<p>error_message: </p>
+								<p> WRONG_PASS </p>
+								<hr> </hr>								
+								<p>success: 0</p>
+								<p>error_message: </p>
+								<p> CATEGORY NOT FOUND </p>
+							</td>
+						</tr>
+	
+						<tr>
+							<td colspan="6" style="font-size:14px; font-weight: bold"> Страницы </td>
+						</tr>
+	
+						<tr>
+							<td>Получение списка страниц</td>
+							<td>api/v1/page</td>
+							<td>GET</td>
+							<td> 
+								<p><strong>username</strong> (string)</p>
+								<p><strong>password</strong> (string)</p>
+							</td>
+							<td> 
+								<p>success: 1</p>
+								<p>items: []</p>
+							</td>
+							<td> 
+								<p>success: 0</p>
+								<p>error_message: </p>
+								<p> WRONG_PASS </p>
+							</td>
+						</tr>	
+						
+						<tr>
+							<td>Получение конкретной страницы</td>
+							<td>api/v1/page/ID</td>
+							<td>GET</td>
+							<td> 
+								<p><strong>username</strong> (string)</p>
+								<p><strong>password</strong> (string)</p>
+							</td>
+							<td> 
+								<p>success: 1</p>
+								<p>items: []</p>
+							</td>
+							<td> 
+								<p>success: 0</p>
+								<p>error_message: </p>
+								<p> WRONG_PASS </p>
+							</td>
+						</tr>
+						
+						<tr>
+							<td>Получение списка страниц для категории</td>
+							<td>api/v1/page/category/ID</td>
+							<td>GET</td>
+							<td> 
+								<p><strong>username</strong> (string)</p>
+								<p><strong>password</strong> (string)</p>
+							</td>
+							<td> 
+								<p>success: 1</p>
+								<p>items: []</p>
+							</td>
+							<td> 
+								<p>success: 0</p>
+								<p>error_message: </p>
+								<p> WRONG_PASS </p>
+							</td>
+						</tr>
+						
+						<tr>
+							<td>Добавление страницы</td>
+							<td>api/v1/page</td>
+							<td>POST</td>
+							<td> 
+								<p><strong>username</strong> (string)</p>
+								<p><strong>password</strong> (string)</p>
+								<p><strong>title<span class="red">*</span></strong> (string)</p>
+								<p><strong>meta_title</strong> (string) </p>
+								<p><strong>url<span class="red">*</span></strong> (string)</p>
+								<p><strong>keywords</strong> (string)</p>
+								<p><strong>description</strong> (string)</p>
+								<p><strong>prev_text</strong> (string)</p>
+								<p><strong>full_text</strong> (string)</p>
+								<p><strong>category</strong> (int)</p>
+								<p><strong>post_status</strong> (string)</p>
+							</td>
+							<td> 
+								<p>success: 1</p>
+								<p>insert_id: #</p>
+							</td>
+							<td> 
+								<p>success: 0</p>
+								<p>error_message: </p>
+								<p> WRONG_PASS </p>
+								<hr> </hr>								
+								<p>success: 0</p>
+								<p>error_message: </p>
+								<p> INCORRECT DATA </p>
+							</td>
+						</tr>
+						
+						<tr>
+							<td>Изменение страницы</td>
+							<td>api/v1/page/ID</td>
+							<td>PUT</td>
+							<td> 
+								<p><strong>username</strong> (string)</p>
+								<p><strong>password</strong> (string)</p>
+								<p><strong>title<span class="red">*</span></strong> (string)</p>
+								<p><strong>meta_title</strong> (string) </p>
+								<p><strong>url<span class="red">*</span></strong> (string)</p>
+								<p><strong>keywords</strong> (string)</p>
+								<p><strong>description</strong> (string)</p>
+								<p><strong>prev_text</strong> (string)</p>
+								<p><strong>full_text</strong> (string)</p>
+								<p><strong>category</strong> (int)</p>
+								<p><strong>post_status</strong> (string)</p>
+							</td>
+							<td> 
+								<p>success: 1</p>
+							</td>
+							<td> 
+								<p>success: 0</p>
+								<p>error_message: </p>
+								<p> WRONG_PASS </p>
+								<hr> </hr>								
+								<p>success: 0</p>
+								<p>error_message: </p>
+								<p> INCORRECT DATA </p>
+							</td>
+						</tr>	
+
+						<tr style="border-bottom: 3px solid #f70">
+							<td>Удаление страницы</td>
+							<td>api/v1/page/ID</td>
+							<td>DELETE</td>
+							<td> 
+								<p><strong>username</strong> (string)</p>
+								<p><strong>password</strong> (string)</p>
+							</td>
+							<td> 
+								<p>success: 1</p>
+							</td>
+							<td> 
+								<p>success: 0</p>
+								<p>error_message: </p>
+								<p> WRONG_PASS </p>
+								<hr> </hr>								
+								<p>success: 0</p>
+								<p>error_message: </p>
+								<p> PAGE NOT FOUND </p>
+							</td>
+						</tr>
+										
+						<tr>
+							<td colspan="6" style="font-size:14px; font-weight: bold"> Меню </td>
+						</tr>
+
+						<tr>
+							<td>Получение списка меню</td>
+							<td>api/v1/menu</td>
+							<td>GET</td>
+							<td> 
+								<p><strong>username</strong> (string)</p>
+								<p><strong>password</strong> (string)</p>
+							</td>
+							<td> 
+								<p>success: 1</p>
+								<p>items: []</p>
+							</td>
+							<td> 
+								<p>success: 0</p>
+								<p>error_message: </p>
+								<p> WRONG_PASS </p>
+							</td>
+						</tr>
+
+						<tr>
+							<td>Получение конкретного меню</td>
+							<td>api/v1/menu/ID</td>
+							<td>GET</td>
+							<td> 
+								<p><strong>username</strong> (string)</p>
+								<p><strong>password</strong> (string)</p>
+							</td>
+							<td> 
+								<p>success: 1</p>
+								<p>items: []</p>
+							</td>
+							<td> 
+								<p>success: 0</p>
+								<p>error_message: </p>
+								<p> WRONG_PASS </p>
+							</td>
+						</tr>
+
+						<tr>
+							<td>Получение пункта меню</td>
+							<td>api/v1/menu/item/ID</td>
+							<td>GET</td>
+							<td> 
+								<p><strong>username</strong> (string)</p>
+								<p><strong>password</strong> (string)</p>
+							</td>
+							<td> 
+								<p>success: 1</p>
+								<p>items: []</p>
+							</td>
+							<td> 
+								<p>success: 0</p>
+								<p>error_message: </p>
+								<p> WRONG_PASS </p>
+							</td>
+						</tr>
+
+						<tr>
+							<td>Получение пунктов меню для указанного меню</td>
+							<td>api/v1/menu/branch/ID</td>
+							<td>GET</td>
+							<td> 
+								<p><strong>username</strong> (string)</p>
+								<p><strong>password</strong> (string)</p>
+							</td>
+							<td> 
+								<p>success: 1</p>
+								<p>items: []</p>
+							</td>
+							<td> 
+								<p>success: 0</p>
+								<p>error_message: </p>
+								<p> WRONG_PASS </p>
+							</td>
+						</tr>
+						
+						<tr>
+							<td>Получение пунктов меню исключая дочерние для текущего пункта</td>
+							<td>api/v1/menu/filter/menuID/itemID</td>
+							<td>GET</td>
+							<td> 
+								<p><strong>username</strong> (string)</p>
+								<p><strong>password</strong> (string)</p>
+							</td>
+							<td> 
+								<p>success: 1</p>
+								<p>items: []</p>
+							</td>
+							<td> 
+								<p>success: 0</p>
+								<p>error_message: </p>
+								<p> WRONG_PASS </p>
+							</td>
+						</tr>
+
+						<tr>
+							<td>Добавление меню</td>
+							<td>api/v1/menu</td>
+							<td>POST</td>
+							<td> 
+								<p><strong>username</strong> (string)</p>
+								<p><strong>password</strong> (string)</p>
+								<p><strong>name<span class="red">*</span></strong> (string)</p>
+								<p><strong>main_title<span class="red">*</span></strong> (string)</p>
+								<p><strong>expand_level</strong> (int)</p>
+							</td>
+							<td> 
+								<p>success: 1</p>
+								<p>insert_id: #</p>
+							</td>
+							<td> 
+								<p>success: 0</p>
+								<p>error_message: </p>
+								<p> WRONG_PASS </p>
+								<hr> </hr>								
+								<p>success: 0</p>
+								<p>error_message: </p>
+								<p> INCORRECT DATA </p>
+							</td>
+						</tr>
+
+						<tr>
+							<td>Добавление пункта меню</td>
+							<td>api/v1/menu/item</td>
+							<td>POST</td>
+							<td> 
+								<p><strong>username</strong> (string)</p>
+								<p><strong>password</strong> (string)</p>
+								<p><strong>menu_id<span class="red">*</span></strong> (int)</p>
+								<p><strong>item_id<span class="red">*</span></strong> (int)</p>
+								<p><strong>item_type<span class="red">*</span></strong> (string)</p>
+								<p><strong>title<span class="red">*</span></strong> (string)</p>
+								<p><strong>parent_id</strong> (int)</p>
+								<p><strong>position</strong> (int)</p>
+								<p><strong>url<span class="red">*</span></strong> (string)</p>
+								<p><strong>hidden</strong> (int)</p>
+							</td>
+							<td> 
+								<p>success: 1</p>
+								<p>insert_id: #</p>
+							</td>
+							<td> 
+								<p>success: 0</p>
+								<p>error_message: </p>
+								<p> WRONG_PASS </p>
+								<hr> </hr>								
+								<p>success: 0</p>
+								<p>error_message: </p>
+								<p> INCORRECT DATA </p>
+							</td>
+						</tr>
+						
+						<tr>
+							<td>Изменение меню</td>
+							<td>api/v1/menu/ID</td>
+							<td>PUT</td>
+							<td> 
+								<p><strong>username</strong> (string)</p>
+								<p><strong>password</strong> (string)</p>
+								<p><strong>name<span class="red">*</span></strong> (string)</p>
+								<p><strong>main_title<span class="red">*</span></strong> (string)</p>
+								<p><strong>expand_level</strong> (int)</p>
+							</td>
+							<td> 
+								<p>success: 1</p>
+							</td>
+							<td> 
+								<p>success: 0</p>
+								<p>error_message: </p>
+								<p> WRONG_PASS </p>
+								<hr> </hr>								
+								<p>success: 0</p>
+								<p>error_message: </p>
+								<p> INCORRECT DATA </p>
+							</td>
+						</tr>
+						
+						<tr>
+							<td>Изменение пункта меню</td>
+							<td>api/v1/menu/item/ID</td>
+							<td>PUT</td>
+							<td> 
+								<p><strong>username</strong> (string)</p>
+								<p><strong>password</strong> (string)</p>
+								<p><strong>menu_id<span class="red">*</span></strong> (int)</p>
+								<p><strong>item_id<span class="red">*</span></strong> (int)</p>
+								<p><strong>item_type<span class="red">*</span></strong> (string)</p>
+								<p><strong>title<span class="red">*</span></strong> (string)</p>
+								<p><strong>parent_id</strong> (int)</p>
+								<p><strong>position</strong> (int)</p>
+								<p><strong>url<span class="red">*</span></strong> (string)</p>
+								<p><strong>hidden</strong> (int)</p>
+							</td>
+							<td> 
+								<p>success: 1</p>
+							</td>
+							<td> 
+								<p>success: 0</p>
+								<p>error_message: </p>
+								<p> WRONG_PASS </p>
+								<hr> </hr>								
+								<p>success: 0</p>
+								<p>error_message: </p>
+								<p> INCORRECT DATA </p>
+							</td>
+						</tr>
+	
+						<tr>
+							<td>Удаление меню</td>
+							<td>api/v1/menu/ID</td>
+							<td>DELETE</td>
+							<td> 
+								<p><strong>username</strong> (string)</p>
+								<p><strong>password</strong> (string)</p>
+							</td>
+							<td> 
+								<p>success: 1</p>
+							</td>
+							<td> 
+								<p>success: 0</p>
+								<p>error_message: </p>
+								<p> WRONG_PASS </p>
+								<hr> </hr>								
+								<p>success: 0</p>
+								<p>error_message: </p>
+								<p> MENU NOT FOUND </p>
+							</td>
+						</tr>
+
+						<tr style="border-bottom: 3px solid #f70">
+							<td>Удаление пункта меню</td>
+							<td>api/v1/menu/item/ID</td>
+							<td>DELETE</td>
+							<td> 
+								<p><strong>username</strong> (string)</p>
+								<p><strong>password</strong> (string)</p>
+							</td>
+							<td> 
+								<p>success: 1</p>
+							</td>
+							<td> 
+								<p>success: 0</p>
+								<p>error_message: </p>
+								<p> WRONG_PASS </p>
+								<hr> </hr>								
+								<p>success: 0</p>
+								<p>error_message: </p>
+								<p> MENU ITEM NOT FOUND </p>
+							</td>
+						</tr>
+						
+						<tr>
+							<td colspan="6" style="font-size:14px; font-weight: bold"> Журнал </td>
+						</tr>
+						
+						<tr style="border-bottom: 3px solid #f70">
+							<td>Получение записей журнала</td>
+							<td>api/v1/journal</td>
+							<td>GET</td>
+							<td> 
+								<p><strong>username</strong> (string)</p>
+								<p><strong>password</strong> (string)</p>
+							</td>
+							<td> 
+								<p>success: 1</p>
+								<p>items: []</p>
+							</td>
+							<td> 
+								<p>success: 0</p>
+								<p>error_message: </p>
+								<p> WRONG_PASS </p>
+							</td>
+						</tr>
+						
+						<tr>
+							<td colspan="6" style="font-size:14px; font-weight: bold"> Настройки сайта </td>
+						</tr>
+						
+						<tr>
+							<td>Получение информации о сайте</td>
+							<td>api/v1/setting/info</td>
+							<td>GET</td>
+							<td> 
+								<p><strong>username</strong> (string)</p>
+								<p><strong>password</strong> (string)</p>
+							</td>
+							<td> 
+								<p>success: 1</p>
+								<p>items: []</p>
+							</td>
+							<td> 
+								<p>success: 0</p>
+								<p>error_message: </p>
+								<p> WRONG_PASS </p>
+							</td>
+						</tr>
+						
+						<tr>
+							<td>Получение настроек мета-тегов</td>
+							<td>api/v1/setting/metatag</td>
+							<td>GET</td>
+							<td> 
+								<p><strong>username</strong> (string)</p>
+								<p><strong>password</strong> (string)</p>
+							</td>
+							<td> 
+								<p>success: 1</p>
+								<p>items: []</p>
+							</td>
+							<td> 
+								<p>success: 0</p>
+								<p>error_message: </p>
+								<p> WRONG_PASS </p>
+							</td>
+						</tr>
+						
+						<tr>
+							<td>Получение мета-тегов для сайта (id - язык, русский - 3)</td>
+							<td>api/v1/setting/metatag/ID</td>
+							<td>GET</td>
+							<td> 
+								<p><strong>username</strong> (string)</p>
+								<p><strong>password</strong> (string)</p>
+							</td>
+							<td> 
+								<p>success: 1</p>
+								<p>items: []</p>
+							</td>
+							<td> 
+								<p>success: 0</p>
+								<p>error_message: </p>
+								<p> WRONG_PASS </p>
+							</td>
+						</tr>
+						
+						<tr>
+							<td>Получение общих настроек сайта</td>
+							<td>api/v1/setting/general</td>
+							<td>GET</td>
+							<td> 
+								<p><strong>username</strong> (string)</p>
+								<p><strong>password</strong> (string)</p>
+							</td>
+							<td> 
+								<p>success: 1</p>
+								<p>items: []</p>
+							</td>
+							<td> 
+								<p>success: 0</p>
+								<p>error_message: </p>
+								<p> WRONG_PASS </p>
+							</td>
+						</tr>
+						
+						<tr>
+							<td>Получение настроек доступа к сайту</td>
+							<td>api/v1/setting/access</td>
+							<td>GET</td>
+							<td> 
+								<p><strong>username</strong> (string)</p>
+								<p><strong>password</strong> (string)</p>
+							</td>
+							<td> 
+								<p>success: 1</p>
+								<p>items: []</p>
+							</td>
+							<td> 
+								<p>success: 0</p>
+								<p>error_message: </p>
+								<p> WRONG_PASS </p>
+							</td>
+						</tr>
+						
+						<tr>
+							<td>Получение списка языков</td>
+							<td>api/v1/setting/lang</td>
+							<td>GET</td>
+							<td> 
+								<p><strong>username</strong> (string)</p>
+								<p><strong>password</strong> (string)</p>
+							</td>
+							<td> 
+								<p>success: 1</p>
+								<p>items: []</p>
+							</td>
+							<td> 
+								<p>success: 0</p>
+								<p>error_message: </p>
+								<p> WRONG_PASS </p>
+							</td>
+						</tr>
+						
+						<tr>
+							<td>Получение языка</td>
+							<td>api/v1/setting/lang/ID</td>
+							<td>GET</td>
+							<td> 
+								<p><strong>username</strong> (string)</p>
+								<p><strong>password</strong> (string)</p>
+							</td>
+							<td> 
+								<p>success: 1</p>
+								<p>items: []</p>
+							</td>
+							<td> 
+								<p>success: 0</p>
+								<p>error_message: </p>
+								<p> WRONG_PASS </p>
+							</td>
+						</tr>
+						
+						<tr>
+							<td>Добавление языка</td>
+							<td>api/v1/setting/lang</td>
+							<td>POST</td>
+							<td> 
+								<p><strong>username</strong> (string)</p>
+								<p><strong>password</strong> (string)</p>
+								<p><strong>lang_name<span class="red">*</span></strong> (string)</p>
+								<p><strong>identif<span class="red">*</span></strong> (string)</p>
+								<p><strong>folder<span class="red">*</span></strong> (string)</p>
+								<p><strong>default</strong> (int)</p>
+								<p><strong>locale<span class="red">*</span></strong> (string)</p>
+							</td>
+							<td> 
+								<p>success: 1</p>
+								<p>insert_id: #</p>
+							</td>
+							<td> 
+								<p>success: 0</p>
+								<p>error_message: </p>
+								<p> WRONG_PASS </p>
+								<hr> </hr>								
+								<p>success: 0</p>
+								<p>error_message: </p>
+								<p> INCORRECT DATA </p>
+							</td>
+						</tr>
+						
+						<tr>
+							<td>Изменение информации о сайте</td>
+							<td>api/v1/setting/info</td>
+							<td>PUT</td>
+							<td> 
+								<p><strong>username</strong> (string)</p>
+								<p><strong>password</strong> (string)</p>
+								<p><strong>siteinfo_companytype</strong> (string)</p>
+								<p><strong>siteinfo_address</strong> (string)</p>
+								<p><strong>siteinfo_mainphone</strong> (string)</p>
+								<p><strong>siteinfo_adminemail</strong> (string)</p>
+								<p><strong>skype</strong> (string)</p>
+								<p><strong>email</strong> (string)</p>
+							</td>
+							<td> 
+								<p>success: 1</p>
+							</td>
+							<td> 
+								<p>success: 0</p>
+								<p>error_message: </p>
+								<p> WRONG_PASS </p>
+								<hr> </hr>								
+								<p>success: 0</p>
+								<p>error_message: </p>
+								<p> INCORRECT DATA </p>
+							</td>
+						</tr>
+						
+						<tr>
+							<td>Изменение мета-тегов</td>
+							<td>api/v1/setting/metatag/ID</td>
+							<td>PUT</td>
+							<td> 
+								<p><strong>username</strong> (string)</p>
+								<p><strong>password</strong> (string)</p>
+								<p><strong>name</strong> (string)</p>
+								<p><strong>short_name</strong> (string)</p>
+								<p><strong>keywords</strong> (string)</p>
+								<p><strong>description</strong> (string)</p>
+							</td>
+							<td> 
+								<p>success: 1</p>
+							</td>
+							<td> 
+								<p>success: 0</p>
+								<p>error_message: </p>
+								<p> WRONG_PASS </p>
+								<hr> </hr>								
+								<p>success: 0</p>
+								<p>error_message: </p>
+								<p> INCORRECT DATA </p>
+							</td>
+						</tr>
+						
+						<tr>
+							<td>Изменение настроек мета-тегов</td>
+							<td>api/v1/setting/metatag</td>
+							<td>PUT</td>
+							<td> 
+								<p><strong>username</strong> (string)</p>
+								<p><strong>password</strong> (string)</p>
+								<p><strong>create_keywords</strong> (int)</p>
+								<p><strong>create_description</strong> (int)</p>
+								<p><strong>add_site_name</strong> (int)</p>
+								<p><strong>add_site_name_to_cat</strong> (int)</p>
+								<p><strong>delimiter</strong> (string)</p>
+							</td>
+							<td> 
+								<p>success: 1</p>
+							</td>
+							<td> 
+								<p>success: 0</p>
+								<p>error_message: </p>
+								<p> WRONG_PASS </p>
+																<hr> </hr>								
+								<p>success: 0</p>
+								<p>error_message: </p>
+								<p> INCORRECT DATA </p>
+							</td>
+						</tr>
+						
+						<tr>
+							<td>Изменение общих настроек</td>
+							<td>api/v1/setting/general</td>
+							<td>PUT</td>
+							<td> 
+								<p><strong>username</strong> (string)</p>
+								<p><strong>password</strong> (string)</p>
+								<p><strong>main_type<span class="red">*</span></strong> (string)</p>
+								<p><strong>main_page_id</strong> (int)</p>
+								<p><strong>main_page_cat</strong> (string)</p>
+							</td>
+							<td> 
+								<p>success: 1</p>
+							</td>
+							<td> 
+								<p>success: 0</p>
+								<p>error_message: </p>
+								<p> WRONG_PASS </p>
+																<hr> </hr>								
+								<p>success: 0</p>
+								<p>error_message: </p>
+								<p> INCORRECT DATA </p>
+							</td>
+						</tr>
+						
+						<tr>
+							<td>Изменение настроек доступа к сайту</td>
+							<td>api/v1/setting/access</td>
+							<td>PUT</td>
+							<td> 
+								<p><strong>username</strong> (string)</p>
+								<p><strong>password</strong> (string)</p>
+								<p><strong>site_offline</strong> (int)</p>
+								<p><strong>robots_status</strong> (int)</p>
+							</td>
+							<td> 
+								<p>success: 1</p>
+							</td>
+							<td> 
+								<p>success: 0</p>
+								<p>error_message: </p>
+								<p> WRONG_PASS </p>
+																<hr> </hr>								
+								<p>success: 0</p>
+								<p>error_message: </p>
+								<p> INCORRECT DATA </p>
+							</td>
+						</tr>
+						
+						<tr>
+							<td>Изменение языка</td>
+							<td>api/v1/setting/lang/ID</td>
+							<td>PUT</td>
+							<td> 
+								<p><strong>username</strong> (string)</p>
+								<p><strong>password</strong> (string)</p>
+								<p><strong>lang_name<span class="red">*</span></strong> (string)</p>
+								<p><strong>identif<span class="red">*</span></strong> (string)</p>
+								<p><strong>folder<span class="red">*</span></strong> (string)</p>
+								<p><strong>default</strong> (int)</p>
+								<p><strong>locale<span class="red">*</span></strong> (string)</p>
+							</td>
+							<td> 
+								<p>success: 1</p>
+							</td>
+							<td> 
+								<p>success: 0</p>
+								<p>error_message: </p>
+								<p> WRONG_PASS </p>
+																<hr> </hr>								
+								<p>success: 0</p>
+								<p>error_message: </p>
+								<p> INCORRECT DATA </p>
+							</td>
+						</tr>
+						
+						<tr style="border-bottom: 3px solid #f70">
+							<td>Удаление языка</td>
+							<td>api/v1/setting/lang/ID</td>
+							<td>DELETE</td>
+							<td> 
+								<p><strong>username</strong> (string)</p>
+								<p><strong>password</strong> (string)</p>
+							</td>
+							<td> 
+								<p>success: 1</p>
+							</td>
+							<td> 
+								<p>success: 0</p>
+								<p>error_message: </p>
+								<p> WRONG_PASS </p>
+																<hr> </hr>								
+								<p>success: 0</p>
+								<p>error_message: </p>
+								<p> LANGUAGE NOT FOUND </p>
+							</td>
+						</tr>
+						
+						<tr>
+							<td colspan="6" style="font-size:14px; font-weight: bold"> Пользователи </td>
+						</tr>
+						
+						<tr>
+							<td>Получение списка пользователей</td>
+							<td>api/v1/user</td>
+							<td>GET</td>
+							<td> 
+								<p><strong>username</strong> (string)</p>
+								<p><strong>password</strong> (string)</p>
+							</td>
+							<td> 
+								<p>success: 1</p>
+								<p>items: []</p>
+							</td>
+							<td> 
+								<p>success: 0</p>
+								<p>error_message: </p>
+								<p> WRONG_PASS </p>
+							</td>
+						</tr>
+						
+						<tr>
+							<td>Получение конкретного пользователя</td>
+							<td>api/v1/user/ID</td>
+							<td>GET</td>
+							<td> 
+								<p><strong>username</strong> (string)</p>
+								<p><strong>password</strong> (string)</p>
+							</td>
+							<td> 
+								<p>success: 1</p>
+								<p>items: []</p>
+							</td>
+							<td> 
+								<p>success: 0</p>
+								<p>error_message: </p>
+								<p> WRONG_PASS </p>
+							</td>
+						</tr>
+						
+						<tr>
+							<td>Получение списка ролей</td>
+							<td>api/v1/user/role</td>
+							<td>GET</td>
+							<td> 
+								<p><strong>username</strong> (string)</p>
+								<p><strong>password</strong> (string)</p>
+							</td>
+							<td> 
+								<p>success: 1</p>
+								<p>items: []</p>
+							</td>
+							<td> 
+								<p>success: 0</p>
+								<p>error_message: </p>
+								<p> WRONG_PASS </p>
+							</td>
+						</tr>
+						
+						<tr>
+							<td>Получение конкретной роли</td>
+							<td>api/v1/user/role/ID</td>
+							<td>GET</td>
+							<td> 
+								<p><strong>username</strong> (string)</p>
+								<p><strong>password</strong> (string)</p>
+							</td>
+							<td> 
+								<p>success: 1</p>
+								<p>items: []</p>
+							</td>
+							<td> 
+								<p>success: 0</p>
+								<p>error_message: </p>
+								<p> WRONG_PASS </p>
+							</td>
+						</tr>
+						
+						<tr>
+							<td>Добавление пользователя</td>
+							<td>api/v1/user</td>
+							<td>POST</td>
+							<td> 
+								<p><strong>username</strong> (string)</p>
+								<p><strong>password</strong> (string)</p>
+								<p><strong>role_id</strong> (int)</p>
+								<p><strong>login</strong> (string)</p>
+								<p><strong>user_password</strong> (string)</p>
+								<p><strong>email</strong> (string)</p>
+								<p><strong>phone</strong> (string)</p>
+							</td>
+							<td> 
+								<p>success: 1</p>
+								<p>insert_id: #</p>
+							</td>
+							<td> 
+								<p>success: 0</p>
+								<p>error_message: </p>
+								<p> WRONG_PASS </p>
+																								<hr> </hr>								
+								<p>success: 0</p>
+								<p>error_message: </p>
+								<p> INCORRECT DATA </p>
+							</td>
+						</tr>
+
+						<tr>
+							<td>Изменение пользователя</td>
+							<td>api/v1/user/ID</td>
+							<td>PUT</td>
+							<td> 
+								<p><strong>username</strong> (string)</p>
+								<p><strong>password</strong> (string)</p>
+								<p><strong>role_id</strong> (int)</p>
+								<p><strong>login</strong> (string)</p>
+								<p><strong>user_password</strong> (string)</p>
+								<p><strong>email</strong> (string)</p>
+								<p><strong>phone</strong> (string)</p>
+							</td>
+							<td> 
+								<p>success: 1</p>
+							</td>
+							<td> 
+								<p>success: 0</p>
+								<p>error_message: </p>
+								<p> WRONG_PASS </p>
+																								<hr> </hr>								
+								<p>success: 0</p>
+								<p>error_message: </p>
+								<p> INCORRECT DATA </p>
+							</td>
+						</tr>
+						
+						<tr>
+							<td>Изменение статуса пользователя</td>
+							<td>api/v1/user/status/ID</td>
+							<td>PUT</td>
+							<td> 
+								<p><strong>username</strong> (string)</p>
+								<p><strong>password</strong> (string)</p>
+								<p><strong>banned</strong> (int)</p>
+							</td>
+							<td> 
+								<p>success: 1</p>
+							</td>
+							<td> 
+								<p>success: 0</p>
+								<p>error_message: </p>
+								<p> WRONG_PASS </p>
+																								<hr> </hr>								
+								<p>success: 0</p>
+								<p>error_message: </p>
+								<p> INCORRECT DATA </p>
+							</td>
+						</tr>
+
+						<tr style="border-bottom: 3px solid #f70">
+							<td>Удаление пользователя</td>
+							<td>api/v1/user/ID</td>
+							<td>DELETE</td>
+							<td> 
+								<p><strong>username</strong> (string)</p>
+								<p><strong>password</strong> (string)</p>
+							</td>
+							<td> 
+								<p>success: 1</p>
+							</td>
+							<td> 
+								<p>success: 0</p>
+								<p>error_message: </p>
+								<p> WRONG_PASS </p>
+																								<hr> </hr>								
+								<p>success: 0</p>
+								<p>error_message: </p>
+								<p> USER NOT FOUND </p>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="6" style="font-size:14px; font-weight: bold"> Комментарии </td>
+						</tr>						
+						
+						<tr>
+							<td>Получение списка комментариев</td>
+							<td>api/v1/comment</td>
+							<td>GET</td>
+							<td> 
+								<p><strong>username</strong> (string)</p>
+								<p><strong>password</strong> (string)</p>
+							</td>
+							<td> 
+								<p>success: 1</p>
+								<p>items: []</p>
+							</td>
+							<td> 
+								<p>success: 0</p>
+								<p>error_message: </p>
+								<p> WRONG_PASS </p>
+							</td>
+						</tr>						
+
+						<tr>
+							<td>Получение конкретного комментария</td>
+							<td>api/v1/comment/ID</td>
+							<td>GET</td>
+							<td> 
+								<p><strong>username</strong> (string)</p>
+								<p><strong>password</strong> (string)</p>
+							</td>
+							<td> 
+								<p>success: 1</p>
+								<p>items: []</p>
+							</td>
+							<td> 
+								<p>success: 0</p>
+								<p>error_message: </p>
+								<p> WRONG_PASS </p>
+							</td>
+						</tr>	
+
+						<tr>
+							<td>Ответ на комментарий</td>
+							<td>api/v1/comment/ID</td>
+							<td>POST</td>
+							<td> 
+								<p><strong>username</strong> (string)</p>
+								<p><strong>password</strong> (string)</p>
+								<p><strong>item_id</strong> (int)</p>
+								<p><strong>text</strong> (string)</p>
+							</td>
+							<td> 
+								<p>success: 1</p>
+								<p>insert_id: #</p>
+							</td>
+							<td> 
+								<p>success: 0</p>
+								<p>error_message: </p>
+								<p> WRONG_PASS </p>
+																																<hr> </hr>								
+								<p>success: 0</p>
+								<p>error_message: </p>
+								<p> INCORRECT DATA </p>
+							</td>
+						</tr>
+
+						<tr>
+							<td>Добавление комментария</td>
+							<td>api/v1/comment</td>
+							<td>POST</td>
+							<td> 
+								<p><strong>username</strong> (string)</p>
+								<p><strong>password</strong> (string)</p>
+								<p><strong>item_id</strong> (int)</p>
+								<p><strong>text</strong> (string)</p>
+							</td>
+							<td> 
+								<p>success: 1</p>
+								<p>insert_id: #</p>
+							</td>
+							<td> 
+								<p>success: 0</p>
+								<p>error_message: </p>
+								<p> WRONG_PASS </p>
+																																<hr> </hr>								
+								<p>success: 0</p>
+								<p>error_message: </p>
+								<p> INCORRECT DATA </p>
+							</td>
+						</tr>						
+
+						<tr>
+							<td>Изменение статуса комментария</td>
+							<td>api/v1/comment/status/ID</td>
+							<td>PUT</td>
+							<td> 
+								<p><strong>username</strong> (string)</p>
+								<p><strong>password</strong> (string)</p>
+								<p><strong>status</strong> (int)</p>
+							</td>
+							<td> 
+								<p>success: 1</p>
+							</td>
+							<td> 
+								<p>success: 0</p>
+								<p>error_message: </p>
+								<p> WRONG_PASS </p>
+																																<hr> </hr>								
+								<p>success: 0</p>
+								<p>error_message: </p>
+								<p> INCORRECT DATA </p>
+							</td>
+						</tr>	
+
+
+						<tr>
+							<td>Удаление комментария</td>
+							<td>api/v1/comment/ID</td>
+							<td>DELETE</td>
+							<td> 
+								<p><strong>username</strong> (string)</p>
+								<p><strong>password</strong> (string)</p>
+							</td>
+							<td> 
+								<p>success: 1</p>
+							</td>
+							<td> 
+								<p>success: 0</p>
+								<p>error_message: </p>
+								<p> WRONG_PASS </p>
+																																<hr> </hr>								
+								<p>success: 0</p>
+								<p>error_message: </p>
+								<p> COMMENT NOT FOUND </p>
+							</td>
+						</tr>	
+						
+					</tbody>
+				</table>
+               </div>
+                
+            </div>
+        </div>
+    </div>
+</div>            <div class="h-footer"></div>
+        </div>
+        <footer>
+            <div class="content-footer">
+                <div class="container">
+                    <div class="copy-right f_l">
+                        <p>&copy; 2015 Demo page</p>                    </div>    
+   
+                </div>
+            </div>
+        </footer>
+				<script type="text/javascript" src="files/animate.js"></script>
+
+
+  
+  <script type="text/javascript">
+	$(window).on('resize', function() {
+		WW = window.innerWidth, HH = window.innerHeight;
+		canvas.width = WW;
+		canvas.height = HH;
+		
+		var circles = []; 
+		for(var i = 0; i < 24; i++ ){
+			circles.push(new create_circle());
+		}
+    });
+	
+  </script>
+</body></html>

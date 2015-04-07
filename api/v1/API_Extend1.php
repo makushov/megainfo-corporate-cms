@@ -48,7 +48,11 @@ class ExtendedAPI extends API_Base
 			
 					$result = $this->db->query("select id, parent_id, position, field_group, name, short_desc, title, keywords, description, url from category");										// all categories
 					
-					return array("success" => 1, "items" => $result->rows);
+					if($result->num_rows > 0){
+						return array("success" => 1, "items" => $result->rows);
+					} else {
+						return array("success" => 0, "error_message" => "CATEGORY LIST EMPTY");
+					}
 					
 				} else if(empty($this->verb) && count($this->args) == 1) {
 					
@@ -56,8 +60,12 @@ class ExtendedAPI extends API_Base
 					
 					$result = $this->db->query("select * from category where id = '".$id."'");															// category by id
 						
-					return array("success" => 1, "items" => $result->rows);	
-												
+					if($result->num_rows > 0){
+						return array("success" => 1, "items" => $result->rows);
+					} else {
+						return array("success" => 0, "error_message" => "CATEGORY NOT FOUND");
+					}
+						
 				} else if($this->verb == 'filter' && count($this->args) == 1){
 					
 					$id = htmlspecialchars(strip_tags($this->args[0]));
@@ -69,8 +77,12 @@ class ExtendedAPI extends API_Base
 					$items = removeChilds($items, $id);
 										
 					$items = array_values($items);
-						
-					return array("success" => 1, "items" => $items);
+										
+					if(count($items) > 0){
+						return array("success" => 1, "items" => $items);
+					} else {
+						return array("success" => 0, "error_message" => "CATEGORY NOT FOUND");
+					}
 					
 				} else {
 					return array("success" => 0, "error_message" => "BAD REQUEST");	
@@ -150,9 +162,10 @@ class ExtendedAPI extends API_Base
 						return array("success" => 0, "error_message" => "CATEGORY NOT FOUND");	
 					else {
 						$data = $this->request;
-						$this->log("Удалена категория. Id: ".$id, $data['username'], $data['device']);			
-						$result = $this->db->query("delete from category where parent_id = '".$id."'");	
-						$result = $this->db->query("update content set category = '0' where category = '".$id."'");
+						$this->log("Удалена категория. Id: ".$id, $data['username'], $data['device']);
+						$query = "delete from content where category = ".$id;					
+						$result = $this->db->query($query);	
+						
 						return array("success" => 1);
 					}
 						
@@ -183,7 +196,11 @@ class ExtendedAPI extends API_Base
 			
 					$result = $this->db->query("select id, title, meta_title, url, keywords, description, prev_text, full_text, category, post_status from content");								// all pages
 					
-					return array("success" => 1, "items" => $result->rows);
+					if($result->num_rows > 0){
+						return array("success" => 1, "items" => $result->rows);
+					} else {
+						return array("success" => 0, "error_message" => "PAGES LIST EMPTY");
+					}
 				
 				} else if(empty($this->verb) && count($this->args) == 1) {
 					
@@ -191,15 +208,23 @@ class ExtendedAPI extends API_Base
 				
 					$result = $this->db->query("select id, title, meta_title, url, keywords, description, prev_text, full_text, category, post_status from content where id = '".$id."'");			// single page by id
 					
-					return array("success" => 1, "items" => $result->rows);
-										
+					if($result->num_rows > 0){
+						return array("success" => 1, "items" => $result->rows);
+					} else {
+						return array("success" => 0, "error_message" => "PAGE NOT FOUND");
+					}
+					
 				} else if(count($this->args) == 1 && $this->verb == 'category'){
 					
 					$id = htmlspecialchars(strip_tags($this->args[0]));
 					
 					$result = $this->db->query("select id, title, meta_title, url, keywords, description, prev_text, full_text, category, post_status from content where category = '".$id."'");	// pages by category
 					
-					return array("success" => 1, "items" => $result->rows);
+					if($result->num_rows > 0){
+						return array("success" => 1, "items" => $result->rows);
+					} else {
+						return array("success" => 0, "error_message" => "NO PAGES IN CATEGORY");
+					}		
 					
 				} else {
 					return array("success" => 0, "error_message" => "BAD REQUEST");									
@@ -267,7 +292,7 @@ class ExtendedAPI extends API_Base
 											
 					$result = $this->db->query($query);
 					
-					if($result->errno)
+					if(!$this->db->countAffected())
 						return array("success" => 0, "error_message" => "INCORRECT DATA");
 					else{
 						$this->log("Изменена страница. Id: ".$id, $data['username'], $data['device']);
@@ -288,12 +313,11 @@ class ExtendedAPI extends API_Base
 	
 					$result = $this->db->query("delete from content where id = '".$id."'");
 					
-					if($result->errno)
+					if(!$this->db->countAffected())
 						return array("success" => 0, "error_message" => "PAGE NOT FOUND");	
 					else {	
 						$data = $this->request;
 						$this->log("Удалена страница. Id: ".$id, $data['username'], $data['device']);
-						$result = $this->db->query("delete from comments where item_id = '".$id."'");
 						return array("success" => 1);
 					}						
 					
@@ -323,7 +347,11 @@ class ExtendedAPI extends API_Base
 				
 					$result = $this->db->query("select id, name, main_title, expand_level from menus");												// all menus
 					
-					return array("success" => 1, "items" => $result->rows);
+					if($result->num_rows > 0){
+						return array("success" => 1, "items" => $result->rows);
+					} else {
+						return array("success" => 0, "error_message" => "MENU LIST EMPTY");
+					}
 					
 				} else if (empty($this->verb) && count($this->args) == 1) {
 					
@@ -331,7 +359,11 @@ class ExtendedAPI extends API_Base
 				
 					$result = $this->db->query("select id, name, main_title, expand_level, from menus where id = '".$id."'");							// menu by id
 					
-					return array("success" => 1, "items" => $result->rows);
+					if($result->num_rows > 0){
+						return array("success" => 1, "items" => $result->rows);
+					} else {
+						return array("success" => 0, "error_message" => "MENU NOT FOUND");
+					}
 					
 				} else if($this->verb == 'item' && count($this->args) == 1){
 				
@@ -355,7 +387,11 @@ class ExtendedAPI extends API_Base
 					
 					$newResult = array_values($newResult);
 					
-					return array("success" => 1, "items" => $newResult);
+					if($result->num_rows > 0){
+						return array("success" => 1, "items" => $newResult);
+					} else {
+						return array("success" => 0, "error_message" => "MENU ITEM NOT FOUND");
+					}
 					
 				} else if($this->verb == 'branch' && count($this->args) == 1){
 				
@@ -379,7 +415,11 @@ class ExtendedAPI extends API_Base
 					
 					$newResult = array_values($newResult);
 					
-					return array("success" => 1, "items" => $newResult);
+					if($result->num_rows > 0){
+						return array("success" => 1, "items" => $newResult);
+					} else {
+						return array("success" => 0, "error_message" => "MENU NOT FOUND");
+					}
 					
 				} else if($this->verb == 'filter' && count($this->args) == 2){
 				
@@ -406,9 +446,12 @@ class ExtendedAPI extends API_Base
 					$newResult = removeChilds($newResult, $itemId);
 															
 					$newResult = array_values($newResult);
-
-					return array("success" => 1, "items" => $newResult);
-						
+										
+					if($result->num_rows > 0){
+						return array("success" => 1, "items" => $newResult);
+					} else {
+						return array("success" => 0, "error_message" => "MENU NOT FOUND");
+					}
 				} else {
 					return array("success" => 0, "error_message" => "BAD REQUEST");
 				}
@@ -544,7 +587,7 @@ class ExtendedAPI extends API_Base
 				
 					$result = $this->db->query("delete from menus_data where id = '".$id."'");							// menu item by id
 										
-					if(!$result->errno){
+					if($this->db->countAffected() > 0){
 						$data = $this->request;
 						$this->log("Удален пункт меню. Id: ".$id, $data['username'], $data['device']);
 						return array("success" => 1);
@@ -620,15 +663,23 @@ class ExtendedAPI extends API_Base
 					
 					$result = $this->db->query("select id, lang_name, identif, folder, `default`, locale from languages");
 						
-					return array("success" => 1, "items" => $result->rows);
+					if($result->num_rows > 0){
+						return array("success" => 1, "items" => $result->rows);
+					} else {
+						return array("success" => 0, "error_message" => "LANGUAGES LIST EMPTY");
+					}	
 					
 				} else if($this->verb == 'lang' && count($this->args) == 1){
 					
 					$id = htmlspecialchars(strip_tags($this->args[0]));
 					
 					$result = $this->db->query("select id, lang_name, identif, folder, `default`, locale from languages where id = '".$id."'");
-					
-					return array("success" => 1, "items" => $result->array(row));								
+						
+					if($result->num_rows > 0){
+						return array("success" => 1, "items" => $result->array(row));
+					} else {
+						return array("success" => 0, "error_message" => "LANGUAGE NOT FOUND");
+					}				
 				}
 				
 				else {
@@ -675,7 +726,9 @@ class ExtendedAPI extends API_Base
 					$newResult['ru']['siteinfo_adminemail'] = $data['siteinfo_adminemail'];
 					
 					$newResult = serialize($newResult);
-	
+					
+
+							
 					$result = $this->db->query("update settings set siteinfo='".$newResult."'");
 					
 					if($result->errno)
@@ -767,10 +820,9 @@ class ExtendedAPI extends API_Base
 				
 					$result = $this->db->query("delete from languages where id = '".$id."'");		
 					
-					if(!$result->errno){						
+					if($this->db->countAffected() > 0){						
 						$data = $this->request;
 						$this->log("Удален язык. Id: ".$id, $data['username'], $data['device']);
-						$result = $this->db->query("delete from settings_i18n where lang_ident = '".$id."'");	
 						return array("success" => 1);
 					} else {
 						return array("success" => 0, "error_message" => "LANGUAGE NOT FOUND");
@@ -801,9 +853,12 @@ class ExtendedAPI extends API_Base
 				if(empty($this->verb) && empty($this->args)){
 					
 					$result = $this->db->query("select * from logs order by ID DESC limit 50");	
-						
-					return array("success" => 1, "items" => $result->rows);
-					
+								
+					if($result->num_rows > 0){
+						return array("success" => 1, "items" => $result->rows);
+					} else {
+						return array("success" => 0, "error_message" => "JOURNAL EMPTY");
+					}					
 				} else {
 					return array("success" => 0, "error_message" => "BAD REQUEST");
 				} 				
@@ -851,8 +906,12 @@ class ExtendedAPI extends API_Base
 					$newResult = $result->rows;
 					
 					stripTrash($newResult);
-						
-					return array("success" => 1, "items" => $newResult);						
+								
+					if($result->num_rows > 0){
+						return array("success" => 1, "items" => $newResult);
+					} else {
+						return array("success" => 0, "error_message" => "COMMENT LIST EMPTY");
+					}
 					
 				} else if (empty($this->verb) && count($this->args) == 1){
 					
@@ -863,8 +922,12 @@ class ExtendedAPI extends API_Base
 					$newResult = $result->rows;
 					
 					stripTrash($newResult);
-					
-					return array("success" => 1, "items" => $newResult);					
+							
+					if($result->num_rows > 0){
+						return array("success" => 1, "items" => $newResult);
+					} else {
+						return array("success" => 0, "error_message" => "COMMENT NOT FOUND");
+					}
 					
 				} else {
 					return array("success" => 0, "error_message" => "BAD REQUEST");
@@ -873,78 +936,11 @@ class ExtendedAPI extends API_Base
 				break;
 			
 			case 'POST':
-						
-				if(empty($this->verb) && count($this->args) == 1) {
-					
-					$id = htmlspecialchars(strip_tags($this->args[0]));
-					
-					$data = $this->request;
-					
-					$date = date_create();					
-					$data['created'] = date_timestamp_get($date);
-					
-					$result = $this->db->query("select id, username from users where email = '".$data['username']."'");		
-					$row = $result->row;		
-					$user_id = $row['id'];
-					$name = $row['username'];
-					
-					$result = $this->db->query("insert into comments (user_id, user_name, user_mail, item_id, text, date, status, parent) values ('".$user_id."', '".$name."', '".$data['username']."', '".$data['item_id']."', '".$data['text']."', '".$data['created']."', '1', '".$id."')");	
-					
-					if($result->errno) {
-						return array("success" => 0, "error_message" => "INCORRECT DATA");						
-					} else {
-						$lastId = $this->db->getLastId();
-						$this->log("Добавлен ответ на комментарий. Id: ".$lastId, $data['username'], $data['device']);
-						return array("success" => 1, "insert_id" => $lastId);
-					}
-
-					
-				} else if(empty($this->verb) && empty($this->args)) {
 										
-					$data = $this->request;
-					
-					$date = date_create();					
-					$data['created'] = date_timestamp_get($date);
-					
-					$result = $this->db->query("select id, username from users where email = '".$data['username']."'");		
-					$row = $result->row;		
-					$id = $row['id'];
-					$name = $row['username'];
-					
-					$result = $this->db->query("insert into comments (user_id, user_name, user_mail, item_id, text, date, status) values ('".$id."', '".$name."', '".$data['username']."', '".$data['item_id']."', '".$data['text']."', '".$data['created']."', '1')");			
-					if($result->errno) {
-						return array("success" => 0, "error_message" => "INCORRECT DATA");						
-					} else {
-						$lastId = $this->db->getLastId();
-						$this->log("Добавлен комментарий. Id: ".$lastId, $data['username'], $data['device']);
-						return array("success" => 1, "insert_id" => $lastId);
-					}
-
-					
-				}
-						
 				break;
 				
 			case 'PUT':
-				
-				if($this->verb == 'status' && count($this->args) == 1) {
-					
-					$id = htmlspecialchars(strip_tags($this->args[0]));
-					
-					$data = $this->request;
-					
-					$result = $this->db->query("update comments set status = '".$data['status']."' where id = '".$id."'");	
-								
-					if($result->errno) {
-						return array("success" => 0, "error_message" => "INCORRECT DATA");						
-					} else {
-						return array("success" => 1);	
-					}
-					
-				} else {
-					return array("success" => 0, "error_message" => "BAD REQUEST");
-				} 
-				
+							
 				break;
 			
 			case 'DELETE':
@@ -955,10 +951,9 @@ class ExtendedAPI extends API_Base
 					
 					$result = $this->db->query("delete from comments where id = '".$id."'");	
 							
-					if(!$result->errno){						
+					if($this->db->countAffected() > 0){						
 						$data = $this->request;
 						$this->log("Удален комментарий. Id: ".$id, $data['username'], $data['device']);
-						$result = $this->db->query("delete from comments where parent = '".$id."'");	
 						return array("success" => 1);
 					} else {
 						return array("success" => 0, "error_message" => "COMMENT NOT FOUND");
@@ -993,22 +988,34 @@ class ExtendedAPI extends API_Base
 					$newResult = $result->rows;
 					
 					nullToEmptyString($newResult);
-						
-					return array("success" => 1, "items" => $newResult);						
+								
+					if($result->num_rows > 0){
+						return array("success" => 1, "items" => $newResult);
+					} else {
+						return array("success" => 0, "error_message" => "USER LIST EMPTY");
+					}
 					
 				} else if ($this->verb == 'role' && empty($this->args)){
 										
 					$result = $this->db->query("select id, alt_name, locale, description from shop_rbac_roles_i18n where locale = 'ru'");	
-						
-					return array("success" => 1, "items" => $result->rows);						
+								
+					if($result->num_rows > 0){
+						return array("success" => 1, "items" => $result->rows);
+					} else {
+						return array("success" => 0, "error_message" => "ROLE LIST EMPTY");
+					}
 					
 				} else if ($this->verb == 'role' && count($this->args) == 1){
 							
 					$id = htmlspecialchars(strip_tags($this->args[0]));
 							
 					$result = $this->db->query("select id, alt_name, locale, description from shop_rbac_roles_i18n where locale = 'ru' and id = '".$id."'");	
-						
-					return array("success" => 1, "items" => $result->rows);						
+								
+					if($result->num_rows > 0){
+						return array("success" => 1, "items" => $result->rows);
+					} else {
+						return array("success" => 0, "error_message" => "ROLE NOT FOUND");  
+					}
 					
 				} else if (empty($this->verb) && count($this->args) == 1){
 					
@@ -1019,9 +1026,12 @@ class ExtendedAPI extends API_Base
 					$newResult = $result->rows;
 					
 					nullToEmptyString($newResult);
-						
-					return array("success" => 1, "items" => $newResult);						
-										
+								
+					if($result->num_rows > 0){
+						return array("success" => 1, "items" => $newResult);
+					} else {
+						return array("success" => 0, "error_message" => "USER NOT FOUND");
+					}											
 				} else {
 					return array("success" => 0, "error_message" => "BAD REQUEST");
 				} 
@@ -1064,28 +1074,13 @@ class ExtendedAPI extends API_Base
 					if(isset($data['user_password']) && !empty($data['user_password'])) {
 						$hash = _encode($data['user_password'], $this->encryption_key);					
 						$hash = crypt($hash);
-						$result = $this->db->query("update users set role_id='".$data['role_id']."', username='".$data['login']."', password='".$hash."', banned = '".$data['banned']."', ban_reason = '".$data['ban_reason']."', email='".$data['email']."', phone='".$data['phone']."' where id = '".$id."'");	
+						$result = $this->db->query("update users set role_id='".$data['role_id']."', username='".$data['login']."', password='".$hash."', email='".$data['email']."', phone='".$data['phone']."' where id = '".$id."'");	
 					} else {
-						$result = $this->db->query("update users set role_id='".$data['role_id']."', username='".$data['login']."', banned = '".$data['banned']."', ban_reason = '".$data['ban_reason']."', email='".$data['email']."', phone='".$data['phone']."' where id = '".$id."'");
+						$result = $this->db->query("update users set role_id='".$data['role_id']."', username='".$data['login']."', email='".$data['email']."', phone='".$data['phone']."' where id = '".$id."'");
 					}
-
-					if(!$result->errno){
+						
+					if($this->db->countAffected() > 0){
 						$this->log("Изменен аккаунт пользователя. Id: ".$id, $data['username'], $data['device']);
-						return array("success" => 1);						
-					} else {
-						return array("success" => 0, "error_message" => "INCORRECT DATA");
-					}			
-					
-				} else if ($this->verb == 'status' && count($this->args) == 1){
-					
-					$id = htmlspecialchars(strip_tags($this->args[0]));
-					
-					$data = $this->request;		
-
-					$result = $this->db->query("update users set banned='".$data['banned']."' where id = '".$id."'");					
-											
-					if(!$result->errno){
-						$this->log("Изменен статус пользователя. Id: ".$id, $data['username'], $data['device']);
 						return array("success" => 1);
 						
 					} else {
@@ -1105,7 +1100,7 @@ class ExtendedAPI extends API_Base
 					
 					$result = $this->db->query("delete from users where id = '".$id."'");		
 								
-					if(!$result->errno){						
+					if($this->db->countAffected() > 0){						
 						$data = $this->request;						
 						$this->log("Удален пользователь. Id: ".$id, $data['username'], $data['device']);
 						return array("success" => 1);						
