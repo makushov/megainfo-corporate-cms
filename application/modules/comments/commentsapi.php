@@ -154,6 +154,8 @@ class Commentsapi extends Comments {
             'enable_comments' => $this->enable_comments,
             'visibleMainForm' => $_POST['visibleMainForm']
         );
+		
+		//echo '<pre>'; print_r($data); echo '</pre>';
         
         if ($this->use_captcha == TRUE && !$this->dx_auth->is_admin()) {
             $this->dx_auth->captcha();
@@ -269,6 +271,7 @@ class Commentsapi extends Comments {
     }
 
     public function newPost() {
+			$time_start = microtime(true); 
         $this->load->model('base');
         $this->init_settings();
 
@@ -280,7 +283,7 @@ class Commentsapi extends Comments {
 
         $item_id = $this->parsUrl($_SERVER['HTTP_REFERER']);
 
-        if ($this->period > 0)
+        /*if ($this->period > 0)
             if ($this->check_comment_period() == FALSE) {
                 echo json_encode(
                         array(
@@ -290,8 +293,10 @@ class Commentsapi extends Comments {
                 );
                 return;
             }
-
+		*/
         // Validate email and nickname from unregistered users.
+		
+
         if ($this->dx_auth->is_logged_in() == FALSE) {
             ($hook = get_hook('comments_set_val_rules')) ? eval($hook) : NULL;
 
@@ -416,6 +421,13 @@ class Commentsapi extends Comments {
                 );
             }
         }
+		$time_end = microtime(true);
+
+//dividing with 60 will give the execution time in minutes other wise seconds
+$execution_time = ($time_end - $time_start);
+
+//execution time of the script
+//echo '<b>Total Execution Time:</b> '.$execution_time;
     }
 
     private function _recount_comments($page_id, $module) {

@@ -23,10 +23,10 @@ class Comments extends MY_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->load->module('core');
+        //$this->load->module('core');
         $this->load->language('comments');
-        $this->load->helper('cookie');
-        $CI = &get_instance();
+        //$this->load->helper('cookie');
+        //$CI = &get_instance();
         $obj = new MY_Lang();
         $obj->load('comments');
     }
@@ -228,158 +228,7 @@ class Comments extends MY_Controller {
      * Add comment
      * @deprecated ImageCMS 4.3
      */
-    public function add() {
-        ($hook = get_hook('comments_on_add')) ? eval($hook) : NULL;
-
-        // Load comments model
-        $this->load->model('base');
-        $this->init_settings();
-
-        // Check access only for registered users
-        if ($this->can_comment === 1 AND $this->dx_auth->is_logged_in() == FALSE) {
-            ($hook = get_hook('comments_login_for_comments')) ? eval($hook) : NULL;
-            $this->core->error(lang('Only authorized users can leave comments.', 'comments') . '<a href="%s" class="loginAjax"> ' . lang('log in, please.', 'comments') . '</ a>');
-        }
-
-        $item_id = $this->input->post('comment_item_id');
-
-        // Check if page comments status.
-        if ($this->module == 'core') {
-            if ($this->base->get_item_comments_status($item_id) == FALSE) {
-                ($hook = get_hook('comments_page_comments_disabled')) ? eval($hook) : NULL;
-                $this->core->error(lang('Commenting on recording is prohibited.', 'comments'));
-            }
-        }
-
-        $this->load->library('user_agent');
-        $this->load->library('form_validation');
-//        $this->form_validation->CI = & $this;
-        // Check post comment period.
-        if ($this->period > 0)
-            if ($this->check_comment_period() == FALSE) {
-                ($hook = get_hook('comments_period_error')) ? eval($hook) : NULL;
-                $this->core->error(sprintf(lang('Allowed to comment once in %s minutes.', 'comments'), $this->period));
-            }
-
-        // Validate email and nickname from unregistered users.
-        if ($this->dx_auth->is_logged_in() == FALSE) {
-            ($hook = get_hook('comments_set_val_rules')) ? eval($hook) : NULL;
-
-            $this->form_validation->set_rules('comment_email', lang('Email', 'comments'), 'trim|required|xss_clean|valid_email');
-            $this->form_validation->set_rules('comment_author', lang('Your name', 'comments'), 'trim|required|xss_clean|max_length[50]');
-            $this->form_validation->set_rules('comment_site', lang('Site', 'comments'), 'trim|xss_clean|max_length[250]');
-        }
-
-        // Check captcha code if captcha_check enabled and user in not admin.
-        if ($this->use_captcha == TRUE AND $this->dx_auth->is_admin() == FALSE) {
-            ($hook = get_hook('comments_set_captcha')) ? eval($hook) : NULL;
-            if ($this->dx_auth->use_recaptcha)
-                $this->form_validation->set_rules('recaptcha_response_field', lang("Code protection"), 'trim|required|xss_clean|callback_captcha_check');
-            else
-                $this->form_validation->set_rules('captcha', lang("Code protection"), 'trim|required|xss_clean|callback_captcha_check');
-        }
-
-        $this->form_validation->set_rules('comment_text', lang('Comment', 'comments'), 'trim|required|xss_clean|max_length[' . $this->max_comment_length . ']');
-
-        if ($this->form_validation->run($this) == FALSE) {
-            ($hook = get_hook('comments_validation_failed')) ? eval($hook) : NULL;
-            //$this->core->error( validation_errors() );
-            $this->template->assign('comment_errors', validation_errors());
-        } else {
-            if ($this->dx_auth->is_logged_in() == FALSE) {
-                ($hook = get_hook('comments_author_not_logged')) ? eval($hook) : NULL;
-
-                $comment_author = trim(htmlspecialchars($this->input->post('comment_author')));
-                $comment_email = trim(htmlspecialchars($this->input->post('comment_email')));
-
-                // Write on cookie nickname and email
-                $this->_write_cookie($comment_author, $comment_email, $this->input->post('comment_site'));
-            } else {
-                ($hook = get_hook('comments_author_logged')) ? eval($hook) : NULL;
-
-                $user = $this->db->get_where('users', array('id' => $this->dx_auth->get_user_id()))->row_array();
-                $comment_author = $user['username'];
-                $comment_email = $user['email'];
-            }
-
-            $comment_text = trim(htmlspecialchars($this->input->post('comment_text')));
-            $comment_text = str_replace("\n", '<br/>', $comment_text);
-            $comment_text_plus = trim(htmlspecialchars($this->input->post('comment_text_plus')));
-            $comment_text_plus = str_replace("\n", '<br/>', $comment_text_plus);
-            $comment_text_minus = trim(htmlspecialchars($this->input->post('comment_text_minus')));
-            $comment_text_minus = str_replace("\n", '<br/>', $comment_text_minus);
-            $rate = $this->input->post('ratec');
-            if ($this->input->post('ratec')) {
-                if (SProductsQuery::create()->findPk($item_id) !== null) {
-                    $model = SProductsRatingQuery::create()->findPk($item_id);
-                    if ($model === null) {
-                        $model = new SProductsRating;
-                        $model->setProductId($item_id);
-                    }
-                    $model->setVotes($model->getVotes() + 1);
-                    $model->setRating($model->getRating() + $rate);
-                    $model->save();
-                }
-            }
-            $parent = $this->input->post('parent');
-
-            if ($comment_text != '') {
-                $comment_data = array(
-                    'module' => $this->module,
-                    'user_id' => $this->dx_auth->get_user_id(), // 0 if unregistered
-                    'user_name' => htmlspecialchars($comment_author),
-                    'user_mail' => $comment_email,
-                    'user_site' => htmlspecialchars($this->input->post('comment_site')),
-                    'text' => $comment_text,
-                    'text_plus' => $comment_text_plus,
-                    'text_minus' => $comment_text_minus,
-                    'item_id' => $item_id,
-                    'status' => $this->_comment_status(),
-                    'agent' => $this->agent->agent_string(),
-                    'user_ip' => $this->input->ip_address(),
-                    'date' => time(),
-                    'rate' => $rate,
-                    'parent' => $parent,
-                );
-
-                ($hook = get_hook('comments_db_insert')) ? eval($hook) : NULL;
-
-                $id = $this->base->add($comment_data);
-
-                if ($comment_data['status'] == 0) {
-                    ($hook = get_hook('comments_update_count')) ? eval($hook) : NULL;
-
-                    $this->db->set('comments_count', 'comments_count + 1', FALSE);
-                    $this->db->where('id', $comment_data['item_id']);
-                    $this->db->update('content');
-                }
-
-                // Drop cached comments
-                $this->cache->delete('comments_' . $item_id . $this->module, 'comments');
-
-                ($hook = get_hook('comments_goes_redirect')) ? eval($hook) : NULL;
-                // Redirect back to page
-                //redirect($this->input->post('redirect'));
-                if ($_POST['redirect'])
-                    redirect((substr($this->input->post('redirect'), 0, 1) == '/') ? $this->input->post('redirect') : '/' . $this->input->post('redirect'), 301);
-                else
-                    redirect('/');
-            }
-            else {
-                ($hook = get_hook('comments_empty_text')) ? eval($hook) : NULL;
-                $this->core->error(lang('Fill text in comment.', 'comments'));
-            }
-        }
-    }
-
-    /**
-     * Determinate comment status.
-     *
-     *  Comment statuses
-     *  0 - Normal(approved) comment.
-     *  1 - Waiting for moderation(pending).
-     *  2 - Spam.
-     */
+   
     private function _comment_status() {
         ($hook = get_hook('comments_on_get_status')) ? eval($hook) : NULL;
 
